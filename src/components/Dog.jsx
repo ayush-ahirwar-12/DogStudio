@@ -5,6 +5,7 @@ import {
   useAnimations,
 } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
+import { useEffect } from "react";
 import * as THREE from "three";
 
 const Dog = () => {
@@ -17,12 +18,15 @@ const Dog = () => {
     gl.outputColorSpace = THREE.SRGBColorSpace;
   });
 
+  const {actions}=useAnimations(model.animations,model.scene)
+  useEffect(()=>{
+    actions["Take 001"].play();
+  },[actions])
+
 
   const [normalMap, sampleMatCap,EyeMatCap] = useTexture([
     "/dog_normals.jpg",
     "/matcap/mat-2.png",
-    "/matcap/mat-19.png",
-
   ]).map((texture) => {
       texture.flipY = false;
   texture.colorSpace = THREE.SRGBColorSpace;
@@ -34,10 +38,6 @@ const Dog = () => {
         matcap:sampleMatCap,
       });
 
-    const DogEyeMaterial = new THREE.MeshMatcapMaterial({
-        normalMap:normalMap,
-        matcap:EyeMatCap
-      });
 
   model.scene.traverse((child) => {
     if (child.name.includes("DOG")) {
@@ -47,13 +47,7 @@ const Dog = () => {
     
   });
 
-    model.scene.traverse((child) => {
-    if (child.name.includes("RIGDOGSTUDIO")) {
-      child.material = DogEyeMaterial
-    }
-    console.log(child.name);
-    
-  });
+
 
 
 
