@@ -9,7 +9,6 @@ import * as THREE from "three";
 
 const Dog = () => {
   const model = useGLTF("/models/dog.drc.glb");
-  console.log(model.animations);
   
 
   useThree(({ camera, scene, gl }) => {
@@ -19,9 +18,11 @@ const Dog = () => {
   });
 
 
-  const [normalMap, sampleMatCap] = useTexture([
+  const [normalMap, sampleMatCap,EyeMatCap] = useTexture([
     "/dog_normals.jpg",
     "/matcap/mat-2.png",
+    "/matcap/mat-19.png",
+
   ]).map((texture) => {
       texture.flipY = false;
   texture.colorSpace = THREE.SRGBColorSpace;
@@ -33,11 +34,28 @@ const Dog = () => {
         matcap:sampleMatCap,
       });
 
+    const DogEyeMaterial = new THREE.MeshMatcapMaterial({
+        normalMap:normalMap,
+        matcap:EyeMatCap
+      });
+
   model.scene.traverse((child) => {
     if (child.name.includes("DOG")) {
       child.material = DogMaterial
     }
+    console.log(child.name);
+    
   });
+
+    model.scene.traverse((child) => {
+    if (child.name.includes("RIGDOGSTUDIO")) {
+      child.material = DogEyeMaterial
+    }
+    console.log(child.name);
+    
+  });
+
+
 
   return (
     <>
