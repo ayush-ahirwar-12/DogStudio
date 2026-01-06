@@ -24,9 +24,11 @@ const Dog = () => {
   },[actions])
 
 
-  const [normalMap, sampleMatCap,EyeMatCap] = useTexture([
+  const [normalMap, sampleMatCap,branchNormalMap,branchMap] = useTexture([
     "/dog_normals.jpg",
     "/matcap/mat-2.png",
+    "/branches_normals.jpeg",
+    "/branches_diffuse.jpeg"
   ]).map((texture) => {
       texture.flipY = false;
   texture.colorSpace = THREE.SRGBColorSpace;
@@ -38,10 +40,18 @@ const Dog = () => {
         matcap:sampleMatCap,
       });
 
+  const BranchMaterial = new THREE.MeshMatcapMaterial({
+    normalMap:branchNormalMap,
+    matcap:branchMap
+  })
+
 
   model.scene.traverse((child) => {
     if (child.name.includes("DOG")) {
       child.material = DogMaterial
+    }
+    else{
+      child.material = BranchMaterial
     }
     console.log(child.name);
     
