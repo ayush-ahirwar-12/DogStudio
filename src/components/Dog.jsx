@@ -10,7 +10,6 @@ import * as THREE from "three";
 
 const Dog = () => {
   const model = useGLTF("/models/dog.drc.glb");
-  
 
   useThree(({ camera, scene, gl }) => {
     camera.position.z = 0.55;
@@ -18,48 +17,47 @@ const Dog = () => {
     gl.outputColorSpace = THREE.SRGBColorSpace;
   });
 
-  const {actions}=useAnimations(model.animations,model.scene)
-  useEffect(()=>{
+  const { actions } = useAnimations(model.animations, model.scene);
+  useEffect(() => {
     actions["Take 001"].play();
-  },[actions])
+  }, [actions]);
 
-
-  const [normalMap, sampleMatCap,branchNormalMap,branchMap] = useTexture([
+  const [normalMap, sampleMatCap] = useTexture([
     "/dog_normals.jpg",
     "/matcap/mat-2.png",
-    "/branches_normals.jpeg",
-    "/branches_diffuse.jpeg"
   ]).map((texture) => {
-      texture.flipY = false;
-  texture.colorSpace = THREE.SRGBColorSpace;
-  return texture;
+    texture.flipY = false;
+    texture.colorSpace = THREE.SRGBColorSpace;
+    return texture;
   });
 
-  const DogMaterial = new THREE.MeshMatcapMaterial({
-        normalMap:normalMap,
-        matcap:sampleMatCap,
-      });
-
-  const BranchMaterial = new THREE.MeshMatcapMaterial({
-    normalMap:branchNormalMap,
-    matcap:branchMap
+  const [branchNormalMap, branchMap] = useTexture([
+    "/branches_normals.jpeg",
+    "/branches_diffuse.jpeg",
+  ]).map((texture)=>{
+    texture.flipY=true;
+    texture.colorSpace=THREE.SRGBColorSpace;
+    return texture;
   })
 
+  const DogMaterial = new THREE.MeshMatcapMaterial({
+    normalMap: normalMap,
+    matcap: sampleMatCap,
+  });
+
+  const BranchMaterial = new THREE.MeshMatcapMaterial({
+    normalMap: branchNormalMap,
+    matcap: branchMap,
+  });
 
   model.scene.traverse((child) => {
     if (child.name.includes("DOG")) {
-      child.material = DogMaterial
-    }
-    else{
-      child.material = BranchMaterial
+      child.material = DogMaterial;
+    } else {
+      child.material = BranchMaterial;
     }
     console.log(child.name);
-    
   });
-
-
-
-
 
   return (
     <>
