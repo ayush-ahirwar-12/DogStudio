@@ -20,7 +20,7 @@ const Dog = () => {
   const { actions } = useAnimations(model.animations, model.scene);
   useEffect(() => {
     actions["Take 001"].play();
-  }, [actions])
+  }, [actions]);
 
   const [normalMap, sampleMatCap] = useTexture([
     "/dog_normals.jpg",
@@ -28,7 +28,7 @@ const Dog = () => {
   ]).map((texture) => {
     texture.flipY = false;
     texture.colorSpace = THREE.SRGBColorSpace;
-    return texture
+    return texture;
   });
 
   const [branchNormalMap, branchMap] = useTexture([
@@ -36,7 +36,7 @@ const Dog = () => {
     "/branches_diffuse.jpeg",
   ]).map((texture)=>{
     texture.colorSpace=THREE.SRGBColorSpace;
-    return texture
+    return texture;
   })
 
   const DogMaterial = new THREE.MeshMatcapMaterial({
