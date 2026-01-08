@@ -35,7 +35,6 @@ const Dog = () => {
     "/branches_normals.jpeg",
     "/branches_diffuse.jpeg",
   ]).map((texture)=>{
-    texture.flipY=true;
     texture.colorSpace=THREE.SRGBColorSpace;
     return texture;
   })
