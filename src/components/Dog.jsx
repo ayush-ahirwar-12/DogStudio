@@ -70,5 +70,5 @@ const Dog = () => {
     </>
   );
 };
-
+//nice to meet you Dog Studio
 export default Dog;
