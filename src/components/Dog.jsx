@@ -28,7 +28,7 @@ const Dog = () => {
   ]).map((texture) => {
     texture.flipY = false;
     texture.colorSpace = THREE.SRGBColorSpace;
-    return texture;
+    return texture
   });
 
   const [branchNormalMap, branchMap] = useTexture([
