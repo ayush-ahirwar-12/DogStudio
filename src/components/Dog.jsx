@@ -7,9 +7,20 @@ import {
 import { useThree } from "@react-three/fiber";
 import { useEffect } from "react";
 import * as THREE from "three";
+import gsap from "gsap";
+import {useGSAP} from "@gsap/react"
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRef } from "react";
+
 
 const Dog = () => {
+  gsap.registerPlugin(useGSAP());
+  gsap.registerPlugin(ScrollTrigger);
+
+
   const model = useGLTF("/models/dog.drc.glb");
+
+
   
 
   useThree(({ camera,scene, gl }) => {
@@ -58,6 +69,19 @@ const Dog = () => {
     }
     console.log(child.name);
   });
+
+  const dogModel = useRef(model);
+
+  useGSAP(()=>{
+    const tl = gsap.timeline({
+      scrollTrigger:{
+        trigger:"#section1",
+        endTrigger:"#section3",
+        start:"top top",
+        end:"bottom bottom"
+      }
+    })
+  },[])
 
   return (
     <>

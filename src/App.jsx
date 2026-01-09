@@ -19,9 +19,9 @@ const App = () => {
       }}>
         <Dog />
       </Canvas>
-      <section></section>
-      <section></section>
-      <section></section>
+      <section id="section1"></section>
+      <section id="section2"></section>
+      <section id="section3"></section>
     </main>
   );
 };
