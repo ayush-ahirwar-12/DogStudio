@@ -4,20 +4,15 @@
   box-sizing: border-box;
 }
 html,body,#root{
+  width: 100%;
   background-color: black;
 }
+main{
+  position: relative;
+}
 section{
-  min-width: 100vw;
   min-height:100vh ;
   border: 2px solid white;
-}
-canvas{
-  min-height: 100vh;
-  min-width: 100vw;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-image: url("/background-xxs.png");
-  background-repeat: no-repeat;
-  background-size: cover;
+  position: relative;
+  z-index: 2;
 }

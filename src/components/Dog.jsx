@@ -10,9 +10,10 @@ import * as THREE from "three";
 
 const Dog = () => {
   const model = useGLTF("/models/dog.drc.glb");
+  
 
   useThree(({ camera,scene, gl }) => {
-    camera.position.z = 0.55;
+    camera.position.z = 0.45;
     gl.toneMapping = THREE.ReinhardToneMapping;
     gl.outputColorSpace = THREE.SRGBColorSpace;
   });
@@ -62,10 +63,11 @@ const Dog = () => {
     <>
       <primitive
         object={model.scene}
-        position={[0.2, -0.5, 0]}
-        rotation={[0, Math.PI / 4, 0]}
+        position={[0.2, -0.55, 0]}
+        rotation={[0, Math.PI / 5, 0]}
       />
       <directionalLight positon={[0, 5, 0]} color={0xffffff} intensity={10} />
+      {/* <OrbitControls/> */}
     </>
   );
 };
