@@ -78,9 +78,16 @@ const Dog = () => {
         trigger:"#section1",
         endTrigger:"#section3",
         start:"top top",
-        end:"bottom bottom"
+        end:"bottom bottom",
+        scrub:true,
+        markers:true
       }
+
     })
+    tl.to(dogModel.current.scene.position,{
+      z:"-=0.60"
+    })
+    
   },[])
 
   return (
