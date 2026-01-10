@@ -77,15 +77,28 @@ const App = () => {
         </div>
         <div className="top-center-right">
           <div className="right-upper-text">
-            <span>Dogstudio is a multidisciplinary</span>
-            <span>creative studio at the intersection</span>
-            <span>of art, design and technology.</span>
+            <h4>
+              <span>Dogstudio is a multidisciplinary</span>
+              <span>creative studio at the intersection</span>
+              <span>of art, design and technology.</span>
+            </h4>
           </div>
+
           <div className="right-lower-text">
             <span>Our goal is to deliver amazing experiences that make</span>
-            <span>people talk, and build strategic value for brands, tech,</span>
+            <span>
+              people talk, and build strategic value for brands, tech,
+            </span>
             <span>entertainment, arts & culture.</span>
           </div>
+          <h5>
+            <span>Facebook</span>
+            <span>Instagram</span>
+            <span>Dribble</span>
+            <span>Twitter</span>
+            <span>Newsletter</span>
+
+          </h5>
         </div>
       </section>
       <section id="section2"></section>
