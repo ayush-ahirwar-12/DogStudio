@@ -76,7 +76,7 @@ const Dog = () => {
     const tl = gsap.timeline({
       scrollTrigger:{
         trigger:"#section1",
-        endTrigger:"#section3",
+        endTrigger:"#section5",
         start:"top top",
         end:"bottom bottom",
         scrub:true,
@@ -108,7 +108,7 @@ const Dog = () => {
         position={[0.2, -0.55, 0]}
         rotation={[0, Math.PI / 5, 0]}
       />
-      <directionalLight positon={[0, 5, 0]} color={0xffffff} intensity={10} />
+      <directionalLight positon={[0, 1, 0]} color={0xffffff} intensity={10} />
       {/* <OrbitControls/> */}
     </>
   );
