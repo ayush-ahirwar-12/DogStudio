@@ -19,7 +19,8 @@ const Dog = () => {
 
 
   const model = useGLTF("/models/dog.drc.glb");
-
+  console.log(model);
+  
 
   
 
@@ -51,6 +52,14 @@ const Dog = () => {
     return texture;
   })
 
+  // const [eyeNormalMap,eyeMap] = useTexture([
+  //   "/dog_normals.jpg",
+  //   "/matcap/mat-13.png"
+  // ]).map((texture)=>{
+  //   // texture.colorSpace=THREE.SRGBColorSpace;
+  //   // texture.flipY=true
+  // })
+
   const DogMaterial = new THREE.MeshMatcapMaterial({
     normalMap: normalMap,
     matcap: sampleMatCap,
@@ -61,14 +70,24 @@ const Dog = () => {
     matcap: branchMap,
   });
 
+  // const EyeMaterial = new THREE.MeshMatcapMaterial({
+  //   normalMap:eyeNormalMap,
+  //   matcap:eyeMap
+  // })
+
   model.scene.traverse((child) => {
     if (child.name.includes("DOG")) {
       child.material = DogMaterial;
     } else {
       child.material = BranchMaterial;
     }
-    console.log(child.name);
   });
+
+  // model.scene.traverse((child)=>{
+  //   if(child.name.includes("RIGDOGSTUDIO")){
+  //     child.material = EyeMaterial
+  //   }
+  // })
 
   const dogModel = useRef(model);
 

@@ -5,8 +5,17 @@ import Dog from "./components/Dog";
 const App = () => {
   return (
     <main>
+      <div className="image">
+        <img src="/background/tomorrowland.png" alt="" />
+        <img src="/background/navy-pier.png" alt="" />
+        <img src="/background/chicago.png" alt="" />
+        <img src="/background/phone.png" alt="" />
+        <img src="/background/kikk.png" alt="" />
+        <img src="/background/kennedy.png" alt="" />
+        <img src="/background/opera.png" alt="" />
+      </div>
       <Canvas
-      id="canvas"
+        id="canvas"
         style={{
           height: "100vh",
           width: "100vw",
@@ -95,47 +104,42 @@ const App = () => {
             <span>Dribble</span>
             <span>Twitter</span>
             <span>Newsletter</span>
-
           </h5>
         </div>
-        <div id="left-line">
-
-
-        </div>
-        <div id="right-line">
-          </div>
-
+        <div id="left-line"></div>
+        <div id="right-line"></div>
       </section>
       <div id="section2">
-            <div id="section2-center">
-              <div className="center-headings">
-                <span>2020 - ONGOING</span>
-                <p>Tomorrowland</p>
-              </div>
-              <div className="center-headings">
-                <span>2018 - TODAY</span>
-                <p>Navy Pier</p>
-              </div><div className="center-headings">
-                <span>2015 - TODAY</span>
-                <p>MSI Chicagao</p>
-              </div><div className="center-headings">
-                <span>2016</span>
-                <p>This Was Louise's Phone</p>
-              </div><div className="center-headings">
-                <span>2012 - TODAY</span>
-                <p>KIKK Festival 2018</p>
-              </div><div className="center-headings">
-                <span>2017
-
-                </span>
-                <p>The Kennedy Center</p>
-              </div><div className="center-headings">
-                <span>2016 - ONGOING</span>
-                <p>Royal Opera Of Wallonia</p>
-              </div>
-              <div className="center-headings"></div>
-
-            </div>
+        <div id="section2-center">
+          <div img-title="tomorrowland" className="center-headings">
+            <span>2020 - ONGOING</span>
+            <p>Tomorrowland</p>
+          </div>
+          <div img-title="navy-pier" className="center-headings">
+            <span>2018 - TODAY</span>
+            <p>Navy Pier</p>
+          </div>
+          <div img-title="chicago" className="center-headings">
+            <span>2015 - TODAY</span>
+            <p>MSI Chicagao</p>
+          </div>
+          <div img-title="phone" className="center-headings">
+            <span>2016</span>
+            <p>This Was Louise's Phone</p>
+          </div>
+          <div img-title="kikk" className="center-headings">
+            <span>2012 - TODAY</span>
+            <p>KIKK Festival 2018</p>
+          </div>
+          <div img-title="kennedy" className="center-headings">
+            <span>2017</span>
+            <p>The Kennedy Center</p>
+          </div>
+          <div img-title="opera" className="center-headings">
+            <span>2016 - ONGOING</span>
+            <p>Royal Opera Of Wallonia</p>
+          </div>
+        </div>
       </div>
       <section id="section3"></section>
       <section id="section4"></section>
