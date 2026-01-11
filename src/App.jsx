@@ -100,8 +100,17 @@ const App = () => {
 
           </h5>
         </div>
+        <div id="left-line">
+
+
+        </div>
+        <div id="right-line">
+          </div>
+
       </section>
-      <section id="section2"></section>
+      <div id="section2">
+
+      </div>
       <section id="section3"></section>
       <section id="section4"></section>
       <section id="section5"></section>

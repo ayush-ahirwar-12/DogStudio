@@ -82,12 +82,31 @@ nav {
       padding-right:1vw;
       color: white;
       font-weight: 300;
-      /* border-right: 1px solid white; */
     }
     h5 span:hover{
        color: grey;
     }
   }
+  #left-line{
+    width: 35rem;
+    height: 1px;
+    background-color: rgba(255, 0, 0, 0.589);
+    position: absolute;
+    transform: rotate(45deg);
+    top: 50%;
+    left: 0%;
+  }
 }
 
+/* ******************** */
+/* Section 2 */
+/* ******************** */
+
+
+#section2{
+  background-color: chocolate;
+  padding: 2rem;
+  position: relative;
+  z-index: 2;
+}
 
