@@ -5,14 +5,14 @@ import Dog from "./components/Dog";
 const App = () => {
   return (
     <main>
-      <div className="image">
-        <img src="/background/tomorrowland.png" alt="" />
-        <img src="/background/navy-pier.png" alt="" />
-        <img src="/background/chicago.png" alt="" />
-        <img src="/background/phone.png" alt="" />
-        <img src="/background/kikk.png" alt="" />
-        <img src="/background/kennedy.png" alt="" />
-        <img src="/background/opera.png" alt="" />
+      <div className="images">
+        <img id="tomorrowland" src="/background/tomorrowland.png" alt="" />
+        <img id="navy-pier" src="/background/navy-pier.png" alt="" />
+        <img id="chicago" src="/background/chicago.png" alt="" />
+        <img id="phone" src="/background/phone.png" alt="" />
+        <img id="kikk" src="/background/kikk.png" alt="" />
+        <img id="kennedy" src="/background/kennedy.png" alt="" />
+        <img id="opera" src="/background/opera.png" alt="" />
       </div>
       <Canvas
         id="canvas"

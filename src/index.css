@@ -165,6 +165,33 @@ nav {
   transition: all 0.3s linear;
 }
 
-main:has(#section2 .center-headings:hover) #canvas::after{
+main:has(#section2 .center-headings:hover) #canvas::after {
   opacity: 0;
 }
+
+.images {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: all 0.3s linear;
+  }
+}
+
+main:has(#section2 .center-headings[img-title="tomorrowland"]:hover)
+  .images
+  #tomorrowland {
+  opacity: 1;
+  background-color: rgb(3, 5, 11);
+}
+
