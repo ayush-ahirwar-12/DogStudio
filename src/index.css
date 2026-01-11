@@ -90,11 +90,20 @@ nav {
   #left-line{
     width: 35rem;
     height: 1px;
-    background-color: rgba(255, 0, 0, 0.589);
+    background-color: rgba(255, 0, 0, 0.793);
     position: absolute;
     transform: rotate(45deg);
     top: 50%;
     left: 0%;
+  }
+    #right-line{
+    width: 10rem;
+    height: 1px;
+    background-color: rgba(255, 0, 0, 0.793);
+    position: absolute;
+    transform: rotate(-45deg);
+    top: 20%;
+    right: 20%;
   }
 }
 
