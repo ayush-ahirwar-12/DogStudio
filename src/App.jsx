@@ -6,6 +6,7 @@ const App = () => {
   return (
     <main>
       <Canvas
+      id="canvas"
         style={{
           height: "100vh",
           width: "100vw",
@@ -13,9 +14,6 @@ const App = () => {
           top: 0,
           left: 0,
           zIndex: 1,
-          backgroundImage: "url(/background-xxs.png)",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
         }}
       >
         <Dog />
