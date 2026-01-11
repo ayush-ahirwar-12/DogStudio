@@ -109,7 +109,35 @@ const App = () => {
 
       </section>
       <div id="section2">
+            <div id="section2-center">
+              <div className="center-headings">
+                <span>2020 - ONGOING</span>
+                <p>Tomorrowland</p>
+              </div>
+              <div className="center-headings">
+                <span>2018 - TODAY</span>
+                <p>Tomorrowland</p>
+              </div><div className="center-headings">
+                <span>2015 - TODAY</span>
+                <p>Tomorrowland</p>
+              </div><div className="center-headings">
+                <span>2016</span>
+                <p>Tomorrowland</p>
+              </div><div className="center-headings">
+                <span>2012 - TODAY</span>
+                <p>Tomorrowland</p>
+              </div><div className="center-headings">
+                <span>2020 - ONGOING
+                  
+                </span>
+                <p>Tomorrowland</p>
+              </div><div className="center-headings">
+                <span>2020 - ONGOING</span>
+                <p>Tomorrowland</p>
+              </div>
+              <div className="center-headings"></div>
 
+            </div>
       </div>
       <section id="section3"></section>
       <section id="section4"></section>
