@@ -125,7 +125,7 @@ const App = () => {
                 <p>This Was Louise's Phone</p>
               </div><div className="center-headings">
                 <span>2012 - TODAY</span>
-                <p>KIKK Festival 2019</p>
+                <p>KIKK Festival 2018</p>
               </div><div className="center-headings">
                 <span>2017
 
