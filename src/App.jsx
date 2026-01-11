@@ -119,7 +119,7 @@ const App = () => {
                 <p>Navy Pier</p>
               </div><div className="center-headings">
                 <span>2015 - TODAY</span>
-                <p>MSI Chicaga</p>
+                <p>MSI Chicagao</p>
               </div><div className="center-headings">
                 <span>2016</span>
                 <p>This Was Louise's Phone</p>
