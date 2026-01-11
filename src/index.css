@@ -195,3 +195,9 @@ main:has(#section2 .center-headings[img-title="tomorrowland"]:hover)
   background-color: rgb(3, 5, 11);
 }
 
+main:has(#section2 .center-headings[img-title="navy-pier"]:hover)
+  .images
+  #navy-pier {
+  opacity: 1;
+  background-color: rgb(3, 5, 11);
+}
