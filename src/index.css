@@ -133,6 +133,8 @@ nav {
       letter-spacing: 0.2rem;
     }
     .center-headings span{
+      width: 10vw;
+      text-align: end;
       margin-top:3.5vh;
       letter-spacing: 0.2rem;
       font-size: 0.7rem;

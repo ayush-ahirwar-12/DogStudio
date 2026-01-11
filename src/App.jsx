@@ -116,24 +116,24 @@ const App = () => {
               </div>
               <div className="center-headings">
                 <span>2018 - TODAY</span>
-                <p>Tomorrowland</p>
+                <p>Navy Pier</p>
               </div><div className="center-headings">
                 <span>2015 - TODAY</span>
-                <p>Tomorrowland</p>
+                <p>MSI Chicago</p>
               </div><div className="center-headings">
                 <span>2016</span>
-                <p>Tomorrowland</p>
+                <p>This Was Louise's Phone</p>
               </div><div className="center-headings">
                 <span>2012 - TODAY</span>
-                <p>Tomorrowland</p>
+                <p>KIKK Festival 2018</p>
               </div><div className="center-headings">
-                <span>2020 - ONGOING
-                  
+                <span>2017
+
                 </span>
-                <p>Tomorrowland</p>
+                <p>The Kennedy Center</p>
               </div><div className="center-headings">
-                <span>2020 - ONGOING</span>
-                <p>Tomorrowland</p>
+                <span>2016 - ONGOING</span>
+                <p>Royal Opera Of Wallonia</p>
               </div>
               <div className="center-headings"></div>
 
