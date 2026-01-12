@@ -1,5 +1,4 @@
 import {
-  OrbitControls,
   useGLTF,
   useTexture,
   useAnimations,
@@ -18,6 +17,7 @@ const Dog = () => {
 
   const model = useGLTF("/models/dog.drc.glb");
   console.log(model);
+  
 
   useThree(({ camera, scene, gl }) => {
     camera.position.z = 0.45;
@@ -94,7 +94,7 @@ const Dog = () => {
   const material = useRef({
     uMatcap1: { value: mat19 },
     uMatcap2: { value: mat2 },
-    uProgress: { value: 1.0 },
+    uProgress: { value: 2.0 },
   });
 
   const DogMaterial = new THREE.MeshMatcapMaterial({
@@ -130,7 +130,7 @@ const Dog = () => {
       `
           vec4 matcapColor1 = texture2D( uMatcapTexture1, uv );
           vec4 matcapColor2 = texture2D( uMatcapTexture2, uv );
-          float transitionFactor  = 0.2;
+          float transitionFactor  = 0.9;
           
           float progress = smoothstep(uProgress - transitionFactor,uProgress, (vViewPosition.x+vViewPosition.y)*0.5 + 0.5);
 
@@ -140,7 +140,7 @@ const Dog = () => {
   }
 
   DogMaterial.onBeforeCompile = onBeforeCompile;
-  BranchMaterial.onBeforeCompile = onBeforeCompile
+  BranchMaterial.onBeforeCompile = onBeforeCompile;
 
   model.scene.traverse((child) => {
     if (child.name.includes("DOG")) {
@@ -208,7 +208,7 @@ const Dog = () => {
         material.current.uMatcap1.value = mat8;
         gsap.to(material.current.uProgress, {
           value: 0.0,
-          duration: 0.5,
+          duration: 1.0,
           onComplete: () => {
             (material.current.uMatcap2.value = material.current.uMatcap1.value),
               (material.current.uProgress = 1.0);
@@ -222,7 +222,7 @@ const Dog = () => {
         material.current.uMatcap1.value = mat9;
         gsap.to(material.current.uProgress, {
           value: 0.0,
-          duration: 0.5,
+          duration: 1.0,
           onComplete: () => {
             (material.current.uMatcap2.value = material.current.uMatcap1.value),
               (material.current.uProgress = 1.0);
@@ -236,7 +236,7 @@ const Dog = () => {
         material.current.uMatcap1.value = mat12;
         gsap.to(material.current.uProgress, {
           value: 0.0,
-          duration: 0.5,
+          duration: 1.0,
           onComplete: () => {
             (material.current.uMatcap2.value = material.current.uMatcap1.value),
               (material.current.uProgress = 1.0);
@@ -250,7 +250,7 @@ const Dog = () => {
         material.current.uMatcap1.value = mat10;
         gsap.to(material.current.uProgress, {
           value: 0.0,
-          duration: 0.5,
+          duration: 1.0,
           onComplete: () => {
             (material.current.uMatcap2.value = material.current.uMatcap1.value),
               (material.current.uProgress = 1.0);
@@ -258,13 +258,13 @@ const Dog = () => {
         });
       });
 
-          document
+    document
       .querySelector(`.center-headings[img-title="kennedy"]`)
       .addEventListener("mouseenter", () => {
         material.current.uMatcap1.value = mat17;
         gsap.to(material.current.uProgress, {
           value: 0.0,
-          duration: 0.5,
+          duration: 1.0,
           onComplete: () => {
             (material.current.uMatcap2.value = material.current.uMatcap1.value),
               (material.current.uProgress = 1.0);
@@ -272,20 +272,33 @@ const Dog = () => {
         });
       });
 
-                document
+    document
       .querySelector(`.center-headings[img-title="opera"]`)
       .addEventListener("mouseenter", () => {
-        material.current.uMatcap1.value = mat19;
+        material.current.uMatcap1.value = mat13;
         gsap.to(material.current.uProgress, {
           value: 0.0,
-          duration: 0.5,
+          duration: 1.0,
           onComplete: () => {
             (material.current.uMatcap2.value = material.current.uMatcap1.value),
               (material.current.uProgress = 1.0);
           },
         });
       });
-  });
+      document
+      .querySelector(`#section2-center`)
+      .addEventListener("mouseleave", () => {
+        material.current.uMatcap1.value = mat2;
+        gsap.to(material.current.uProgress, {
+          value: 0.0,
+          duration: 1.0,
+          onComplete: () => {
+            (material.current.uMatcap2.value = material.current.uMatcap1.value),
+              (material.current.uProgress = 2.0);
+          },
+        });
+      }); 
+  },[]);
 
   return (
     <>
@@ -294,7 +307,10 @@ const Dog = () => {
         position={[0.2, -0.55, 0]}
         rotation={[0, Math.PI / 5, 0]}
       />
-      <directionalLight positon={[0, 1, 0]} color={0xffffff} intensity={10} />
+      {/* <directionalLight positon={[0,5,5]} color={0xFFFFFF} intensity={10} />
+       */}
+      <ambientLight positon={[0,5,5]} color={0xFFFFFF} intensity={10} />
+
       {/* <OrbitControls/> */}
     </>
   );

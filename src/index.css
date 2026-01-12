@@ -212,21 +212,21 @@ main:has(#section2 .center-headings[img-title="phone"]:hover)
   .images
   #phone {
   opacity: 1;
-  background-color: rgb(3, 5, 11);
+background-color: rgb(5, 11, 33)
 }
 
 main:has(#section2 .center-headings[img-title="kikk"]:hover)
   .images
   #kikk{
   opacity: 1;
-  background-color: rgb(3, 5, 11);
+  background-color: rgb(17, 38, 104);
 }
 
 main:has(#section2 .center-headings[img-title="kennedy"]:hover)
   .images
   #kennedy{
   opacity: 1;
-  background-color: rgb(3, 5, 11);
+  background-color: rgba(13, 55, 94, 0.478);
 }
 
 main:has(#section2 .center-headings[img-title="opera"]:hover)
