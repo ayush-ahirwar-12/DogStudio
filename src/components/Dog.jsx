@@ -21,7 +21,7 @@ const Dog = () => {
 
   useThree(({ camera, scene, gl }) => {
     camera.position.z = 0.45;
-    gl.toneMapping = THREE.ReinhardToneMapping;
+    // gl.toneMapping = THREE.ReinhardToneMapping;
     gl.outputColorSpace = THREE.SRGBColorSpace;
   });
 
@@ -79,7 +79,7 @@ const Dog = () => {
 
   const [normalMap] = useTexture(["/dog_normals.jpg"]).map((texture) => {
     texture.flipY = false;
-    texture.colorSpace = THREE.SRGBColorSpace;
+    // texture.colorSpace = THREE.SRGBColorSpace;
     return texture;
   });
 
@@ -307,9 +307,9 @@ const Dog = () => {
         position={[0.2, -0.55, 0]}
         rotation={[0, Math.PI / 5, 0]}
       />
-      {/* <directionalLight positon={[0,5,5]} color={0xFFFFFF} intensity={10} />
-       */}
-      <ambientLight positon={[0,5,5]} color={0xFFFFFF} intensity={10} />
+      <directionalLight positon={[0,5,5]} color={0xFFFFFF} intensity={10} />
+      
+      {/* <ambientLight positon={[0,5,5]} color={0xFFFFFF} intensity={10} /> */}
 
       {/* <OrbitControls/> */}
     </>
