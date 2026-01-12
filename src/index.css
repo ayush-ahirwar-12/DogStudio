@@ -234,5 +234,5 @@ main:has(#section2 .center-headings[img-title="opera"]:hover)
   .images
   #opera{
   opacity: 1;
-  background-color: rgb(3, 5, 11);
+  background-color:rgb(114, 4, 4);
 }

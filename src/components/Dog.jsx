@@ -8,23 +8,18 @@ import { useThree } from "@react-three/fiber";
 import { useEffect } from "react";
 import * as THREE from "three";
 import gsap from "gsap";
-import {useGSAP} from "@gsap/react"
+import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
-
 
 const Dog = () => {
   gsap.registerPlugin(useGSAP());
   gsap.registerPlugin(ScrollTrigger);
 
-
   const model = useGLTF("/models/dog.drc.glb");
   console.log(model);
-  
 
-  
-
-  useThree(({ camera,scene, gl }) => {
+  useThree(({ camera, scene, gl }) => {
     camera.position.z = 0.45;
     gl.toneMapping = THREE.ReinhardToneMapping;
     gl.outputColorSpace = THREE.SRGBColorSpace;
@@ -34,6 +29,51 @@ const Dog = () => {
   useEffect(() => {
     actions["Take 001"].play();
   }, [actions]);
+
+  const [
+    mat1,
+    mat2,
+    mat3,
+    mat4,
+    mat5,
+    mat6,
+    mat7,
+    mat8,
+
+    mat9,
+    mat10,
+    mat11,
+    mat12,
+    mat13,
+    mat14,
+    mat15,
+    mat16,
+    mat17,
+    mat18,
+    mat19,
+    mat20,
+  ] = useTexture([
+    "/matcap/mat-1.png",
+    "/matcap/mat-2.png",
+    "/matcap/mat-3.png",
+    "/matcap/mat-4.png",
+    "/matcap/mat-5.png",
+    "/matcap/mat-6.png",
+    "/matcap/mat-7.png",
+    "/matcap/mat-8.png",
+    "/matcap/mat-9.png",
+    "/matcap/mat-10.png",
+    "/matcap/mat-11.png",
+    "/matcap/mat-12.png",
+    "/matcap/mat-13.png",
+    "/matcap/mat-14.png",
+    "/matcap/mat-15.png",
+    "/matcap/mat-16.png",
+    "/matcap/mat-17.png",
+    "/matcap/mat-18.png",
+    "/matcap/mat-19.png",
+    "/matcap/mat-20.png",
+  ]);
 
   const [normalMap, sampleMatCap] = useTexture([
     "/dog_normals.jpg",
@@ -47,18 +87,16 @@ const Dog = () => {
   const [branchNormalMap, branchMap] = useTexture([
     "/branches_normals.jpeg",
     "/branches_diffuse.jpeg",
-  ]).map((texture)=>{
-    texture.colorSpace=THREE.SRGBColorSpace;
+  ]).map((texture) => {
+    texture.colorSpace = THREE.SRGBColorSpace;
     return texture;
-  })
+  });
 
-  // const [eyeNormalMap,eyeMap] = useTexture([
-  //   "/dog_normals.jpg",
-  //   "/matcap/mat-13.png"
-  // ]).map((texture)=>{
-  //   // texture.colorSpace=THREE.SRGBColorSpace;
-  //   // texture.flipY=true
-  // })
+  const material = useRef({
+    uMatcap1: { value: mat19 },
+    uMatcap2:{value : mat2},
+    uProgress:{value:1.0}
+  });
 
   const DogMaterial = new THREE.MeshMatcapMaterial({
     normalMap: normalMap,
@@ -70,10 +108,37 @@ const Dog = () => {
     matcap: branchMap,
   });
 
-  // const EyeMaterial = new THREE.MeshMatcapMaterial({
-  //   normalMap:eyeNormalMap,
-  //   matcap:eyeMap
-  // })
+  function onBeforeCompile(shader) {
+    shader.uniforms.uMatcapTexture1 = material.current.uMatcap1;
+    shader.uniforms.uMatcapTexture2 = material.current.uMatcap2;
+    shader.uniforms.uProgress = material.current.uProgress;
+
+    // Store reference to shader uniforms for GSAP animation
+
+    shader.fragmentShader = shader.fragmentShader.replace(
+      "void main() {",
+      `
+        uniform sampler2D uMatcapTexture1;
+        uniform sampler2D uMatcapTexture2;
+        uniform float uProgress;
+
+        void main() {
+        `
+    );
+
+    shader.fragmentShader = shader.fragmentShader.replace(
+      "vec4 matcapColor = texture2D( matcap, uv );",
+      `
+          vec4 matcapColor1 = texture2D( uMatcapTexture1, uv );
+          vec4 matcapColor2 = texture2D( uMatcapTexture2, uv );
+          float transitionFactor  = 0.2;
+          
+          float progress = smoothstep(uProgress - transitionFactor,uProgress, (vViewPosition.x+vViewPosition.y)*0.5 + 0.5);
+
+          vec4 matcapColor = mix(matcapColor2, matcapColor1, progress );
+        `
+    );
+  }
 
   model.scene.traverse((child) => {
     if (child.name.includes("DOG")) {
@@ -83,41 +148,42 @@ const Dog = () => {
     }
   });
 
-  // model.scene.traverse((child)=>{
-  //   if(child.name.includes("RIGDOGSTUDIO")){
-  //     child.material = EyeMaterial
-  //   }
-  // })
-
   const dogModel = useRef(model);
 
-  useGSAP(()=>{
+  useGSAP(() => {
     const tl = gsap.timeline({
-      scrollTrigger:{
-        trigger:"#section1",
-        endTrigger:"#section5",
-        start:"top top",
-        end:"bottom bottom",
-        scrub:true,
-      }
-
-    })
-    tl.to(dogModel.current.scene.position,{
-      z:"-=0.40"
-    })
-    tl.to(dogModel.current.scene.rotation,{
-      x:`+=${Math.PI/16}`
-    })
-    tl.to(dogModel.current.scene.rotation,{
-      x:`-=${Math.PI/60}`,
-      y:`-=${Math.PI}`
-    },"three")
-    tl.to(dogModel.current.scene.position,{
-      z:"+=0.20",
-      x:"-=0.6",
-      y:"+=0.13"
-    },"three")
-  },[])
+      scrollTrigger: {
+        trigger: "nav",
+        endTrigger: "#section5",
+        start: "top top",
+        end: "bottom bottom",
+        scrub: true,
+      },
+    });
+    tl.to(dogModel.current.scene.position, {
+      z: "-=0.40",
+    });
+    tl.to(dogModel.current.scene.rotation, {
+      x: `+=${Math.PI / 16}`,
+    });
+    tl.to(
+      dogModel.current.scene.rotation,
+      {
+        x: `-=${Math.PI / 60}`,
+        y: `-=${Math.PI}`,
+      },
+      "three"
+    );
+    tl.to(
+      dogModel.current.scene.position,
+      {
+        z: "+=0.20",
+        x: "-=0.6",
+        y: "+=0.13",
+      },
+      "three"
+    );
+  }, []);
 
   return (
     <>
