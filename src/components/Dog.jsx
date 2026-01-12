@@ -72,14 +72,12 @@ const Dog = () => {
     "/matcap/mat-18.png",
     "/matcap/mat-19.png",
     "/matcap/mat-20.png",
-  ]).map(texture => {
-        texture.colorSpace = THREE.SRGBColorSpace
-        return texture
-    })
-
-  const [normalMap] = useTexture([
-    "/dog_normals.jpg",
   ]).map((texture) => {
+    texture.colorSpace = THREE.SRGBColorSpace;
+    return texture;
+  });
+
+  const [normalMap] = useTexture(["/dog_normals.jpg"]).map((texture) => {
     texture.flipY = false;
     texture.colorSpace = THREE.SRGBColorSpace;
     return texture;
@@ -95,8 +93,8 @@ const Dog = () => {
 
   const material = useRef({
     uMatcap1: { value: mat19 },
-    uMatcap2:{value : mat2},
-    uProgress:{value:1.0}
+    uMatcap2: { value: mat2 },
+    uProgress: { value: 1.0 },
   });
 
   const DogMaterial = new THREE.MeshMatcapMaterial({
@@ -141,8 +139,8 @@ const Dog = () => {
     );
   }
 
-  DogMaterial.onBeforeCompile = onBeforeCompile
-  // BranchMaterial.onBeforeCompile = onBeforeCompile
+  DogMaterial.onBeforeCompile = onBeforeCompile;
+  BranchMaterial.onBeforeCompile = onBeforeCompile
 
   model.scene.traverse((child) => {
     if (child.name.includes("DOG")) {
@@ -189,33 +187,105 @@ const Dog = () => {
     );
   }, []);
 
-  useEffect(()=>{
-    document.querySelector(`.center-headings[img-title="tomorrowland"]`).addEventListener("mouseenter",()=>{
-      material.current.uMatcap1.value=mat19
-      gsap.to(material.current.uProgress,{
-        value:0.0,
-        duration:1,
-        onComplete:()=>{
-          material.current.uMatcap2.value = material.current.uMatcap1.value,
-          material.current.uProgress=1.0
-        }
-      })
+  useEffect(() => {
+    document
+      .querySelector(`.center-headings[img-title="tomorrowland"]`)
+      .addEventListener("mouseenter", () => {
+        material.current.uMatcap1.value = mat19;
+        gsap.to(material.current.uProgress, {
+          value: 0.0,
+          duration: 0.5,
+          onComplete: () => {
+            (material.current.uMatcap2.value = material.current.uMatcap1.value),
+              (material.current.uProgress = 1.0);
+          },
+        });
+      });
 
-    })
+    document
+      .querySelector(`.center-headings[img-title="navy-pier"]`)
+      .addEventListener("mouseenter", () => {
+        material.current.uMatcap1.value = mat8;
+        gsap.to(material.current.uProgress, {
+          value: 0.0,
+          duration: 0.5,
+          onComplete: () => {
+            (material.current.uMatcap2.value = material.current.uMatcap1.value),
+              (material.current.uProgress = 1.0);
+          },
+        });
+      });
 
-     document.querySelector(`.center-headings[img-title="navy-pier"]`).addEventListener("mouseenter",()=>{
-      material.current.uMatcap1.value=mat8
-      gsap.to(material.current.uProgress,{
-        value:0.0,
-        duration:1,
-        onComplete:()=>{
-          material.current.uMatcap2.value = material.current.uMatcap1.value,
-          material.current.uProgress=1.0
-        }
-      })
+    document
+      .querySelector(`.center-headings[img-title="chicago"]`)
+      .addEventListener("mouseenter", () => {
+        material.current.uMatcap1.value = mat9;
+        gsap.to(material.current.uProgress, {
+          value: 0.0,
+          duration: 0.5,
+          onComplete: () => {
+            (material.current.uMatcap2.value = material.current.uMatcap1.value),
+              (material.current.uProgress = 1.0);
+          },
+        });
+      });
 
-    })
-  })
+    document
+      .querySelector(`.center-headings[img-title="phone"]`)
+      .addEventListener("mouseenter", () => {
+        material.current.uMatcap1.value = mat12;
+        gsap.to(material.current.uProgress, {
+          value: 0.0,
+          duration: 0.5,
+          onComplete: () => {
+            (material.current.uMatcap2.value = material.current.uMatcap1.value),
+              (material.current.uProgress = 1.0);
+          },
+        });
+      });
+
+    document
+      .querySelector(`.center-headings[img-title="kikk"]`)
+      .addEventListener("mouseenter", () => {
+        material.current.uMatcap1.value = mat10;
+        gsap.to(material.current.uProgress, {
+          value: 0.0,
+          duration: 0.5,
+          onComplete: () => {
+            (material.current.uMatcap2.value = material.current.uMatcap1.value),
+              (material.current.uProgress = 1.0);
+          },
+        });
+      });
+
+          document
+      .querySelector(`.center-headings[img-title="kennedy"]`)
+      .addEventListener("mouseenter", () => {
+        material.current.uMatcap1.value = mat17;
+        gsap.to(material.current.uProgress, {
+          value: 0.0,
+          duration: 0.5,
+          onComplete: () => {
+            (material.current.uMatcap2.value = material.current.uMatcap1.value),
+              (material.current.uProgress = 1.0);
+          },
+        });
+      });
+
+                document
+      .querySelector(`.center-headings[img-title="opera"]`)
+      .addEventListener("mouseenter", () => {
+        material.current.uMatcap1.value = mat19;
+        gsap.to(material.current.uProgress, {
+          value: 0.0,
+          duration: 0.5,
+          onComplete: () => {
+            (material.current.uMatcap2.value = material.current.uMatcap1.value),
+              (material.current.uProgress = 1.0);
+          },
+        });
+      });
+  });
 
   return (
     <>

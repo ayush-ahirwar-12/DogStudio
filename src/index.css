@@ -192,22 +192,21 @@ main:has(#section2 .center-headings[img-title="tomorrowland"]:hover)
   .images
   #tomorrowland {
   opacity: 1;
-  background-color: rgb(3, 5, 11);
+  background-color: rgb(7, 14, 37);
 }
 
 main:has(#section2 .center-headings[img-title="navy-pier"]:hover)
   .images
   #navy-pier {
   opacity: 1;
-  background-color: rgb(3, 5, 11);
+  background-color: rgb(7, 14, 37);
 }
 
 main:has(#section2 .center-headings[img-title="chicago"]:hover)
   .images
   #chicago {
   opacity: 1;
-  background-color: rgb(3, 5, 11);
-}
+background-color: rgb(6, 14, 40)}
 
 main:has(#section2 .center-headings[img-title="phone"]:hover)
   .images
