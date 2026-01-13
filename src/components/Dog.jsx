@@ -15,13 +15,11 @@ const Dog = () => {
   gsap.registerPlugin(useGSAP());
   gsap.registerPlugin(ScrollTrigger);
 
-  const model = useGLTF("/models/dog.drc.glb");
-  console.log(model);
-  
+  const model = useGLTF("/models/dog.drc.glb");  
 
   useThree(({ camera, scene, gl }) => {
     camera.position.z = 0.45;
-    // gl.toneMapping = THREE.ReinhardToneMapping;
+    gl.toneMapping = THREE.ReinhardToneMapping;
     gl.outputColorSpace = THREE.SRGBColorSpace;
   });
 
@@ -87,9 +85,10 @@ const Dog = () => {
     "/branches_normals.jpeg",
     "/branches_diffuse.jpeg",
   ]).map((texture) => {
-    texture.colorSpace = THREE.SRGBColorSpace;
+    // texture.colorSpace = THREE.SRGBColorSpace;
     return texture;
   });
+
 
   const material = useRef({
     uMatcap1: { value: mat19 },
@@ -106,6 +105,13 @@ const Dog = () => {
     normalMap: branchNormalMap,
     matcap: branchMap,
   });
+
+  const EyeMaterial = new THREE.MeshMatcapMaterial({
+    normalMap:normalMap,
+    matcap:mat1
+  })
+
+
 
   function onBeforeCompile(shader) {
     shader.uniforms.uMatcapTexture1 = material.current.uMatcap1;
@@ -143,8 +149,14 @@ const Dog = () => {
   BranchMaterial.onBeforeCompile = onBeforeCompile;
 
   model.scene.traverse((child) => {
+    
     if (child.name.includes("DOG")) {
+      console.log(child.name);
+      
       child.material = DogMaterial;
+      if(child.name.includes("RIGDOGSTUDIO")){
+        child.material = EyeMaterial
+      }
     } else {
       child.material = BranchMaterial;
     }
