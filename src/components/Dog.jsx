@@ -108,9 +108,14 @@ const Dog = () => {
     const material = useRef({
     uMatcap1: { value: mat19 },
     uMatcap2: { value: mat2 },
-    uMatcap3 : {value:mat1},
     uProgress: { value: 2.0 },
   });
+
+  const material2 = useRef({
+    uMatcap1:{value:mat19},
+    uMatcap2:{value:mat1},
+    uProgress:{value:2.0}
+  })
 
 
 
@@ -146,9 +151,9 @@ const Dog = () => {
     );
   }
     function onBeforeCompileEye(shader) {
-    shader.uniforms.uMatcapTexture1 = material.current.uMatcap1;
-    shader.uniforms.uMatcapTexture2 = material.current.uMatcap3;
-    shader.uniforms.uProgress = material.current.uProgress;
+    shader.uniforms.uMatcapTexture1 = material2.current.uMatcap1;
+    shader.uniforms.uMatcapTexture2 = material2.current.uMatcap2;
+    shader.uniforms.uProgress = material2.current.uProgress;
 
     // Store reference to shader uniforms for GSAP animation
 
@@ -238,12 +243,15 @@ const Dog = () => {
       .querySelector(`.center-headings[img-title="tomorrowland"]`)
       .addEventListener("mouseenter", () => {
         material.current.uMatcap1.value = mat19;
-        // EyeMaterial.matcap = mat19;
+        EyeMaterial.matcap = mat19
+        // material2.current.uMatcap1.value = mat19
         gsap.to(material.current.uProgress, {
           value: 0.0,
           duration: 0.5,
           onComplete: () => {
             (material.current.uMatcap2.value = material.current.uMatcap1.value),
+            // (material2.current.uMatcap2.value = material2.current.uMatcap1.value),
+
               (material.current.uProgress = 1.0);
           },
         });
@@ -336,7 +344,6 @@ const Dog = () => {
       .querySelector(`#section2-center`)
       .addEventListener("mouseleave", () => {
         material.current.uMatcap1.value = mat2;
-        material.current.uMatcap3.value = mat1;
         EyeMaterial.matcap = mat1;
         gsap.to(material.current.uProgress, {
           value: 0.0,
