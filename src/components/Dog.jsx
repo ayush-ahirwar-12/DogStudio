@@ -90,12 +90,6 @@ const Dog = () => {
   });
 
 
-  const material = useRef({
-    uMatcap1: { value: mat19 },
-    uMatcap2: { value: mat2 },
-    uProgress: { value: 2.0 },
-  });
-
   const DogMaterial = new THREE.MeshMatcapMaterial({
     normalMap: normalMap,
     matcap: mat2,
@@ -110,6 +104,13 @@ const Dog = () => {
     normalMap:normalMap,
     matcap:mat1
   })
+
+    const material = useRef({
+    uMatcap1: { value: mat19 },
+    uMatcap2: { value: mat2 },
+    uMatcap3 : {value:mat1},
+    uProgress: { value: 2.0 },
+  });
 
 
 
@@ -144,9 +145,41 @@ const Dog = () => {
         `
     );
   }
+    function onBeforeCompileEye(shader) {
+    shader.uniforms.uMatcapTexture1 = material.current.uMatcap1;
+    shader.uniforms.uMatcapTexture2 = material.current.uMatcap3;
+    shader.uniforms.uProgress = material.current.uProgress;
+
+    // Store reference to shader uniforms for GSAP animation
+
+    shader.fragmentShader = shader.fragmentShader.replace(
+      "void main() {",
+      `
+        uniform sampler2D uMatcapTexture1;
+        uniform sampler2D uMatcapTexture2;
+        uniform float uProgress;
+
+        void main() {
+        `
+    );
+
+    shader.fragmentShader = shader.fragmentShader.replace(
+      "vec4 matcapColor = texture2D( matcap, uv );",
+      `
+          vec4 matcapColor1 = texture2D( uMatcapTexture1, uv );
+          vec4 matcapColor2 = texture2D( uMatcapTexture2, uv );
+          float transitionFactor  = 0.9;
+          
+          float progress = smoothstep(uProgress - transitionFactor,uProgress, (vViewPosition.x+vViewPosition.y)*0.5 + 0.5);
+
+          vec4 matcapColor = mix(matcapColor2, matcapColor1, progress );
+        `
+    );
+  }
 
   DogMaterial.onBeforeCompile = onBeforeCompile;
   BranchMaterial.onBeforeCompile = onBeforeCompile;
+  EyeMaterial.onBeforeCompile = onBeforeCompileEye
 
   model.scene.traverse((child) => {
     
@@ -156,6 +189,7 @@ const Dog = () => {
       child.material = DogMaterial;
       if(child.name.includes("RIGDOGSTUDIO")){
         child.material = EyeMaterial
+       
       }
     } else {
       child.material = BranchMaterial;
@@ -204,6 +238,7 @@ const Dog = () => {
       .querySelector(`.center-headings[img-title="tomorrowland"]`)
       .addEventListener("mouseenter", () => {
         material.current.uMatcap1.value = mat19;
+        // EyeMaterial.matcap = mat19;
         gsap.to(material.current.uProgress, {
           value: 0.0,
           duration: 0.5,
@@ -301,6 +336,8 @@ const Dog = () => {
       .querySelector(`#section2-center`)
       .addEventListener("mouseleave", () => {
         material.current.uMatcap1.value = mat2;
+        material.current.uMatcap3.value = mat1;
+        EyeMaterial.matcap = mat1;
         gsap.to(material.current.uProgress, {
           value: 0.0,
           duration: 1.0,
