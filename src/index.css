@@ -346,4 +346,21 @@ h1::before {
       color: rgba(255, 255, 255, 0.39);
     }
   }
+  footer{
+    background-color: antiquewhite;
+    padding-bottom: 25vh;
+    padding-inline: 7vw;
+    height: 10vh;
+    .footer-center{
+      background-color: aqua;
+      display: flex;
+      justify-content: space-between;
+      .footer-center-divs h1{
+        padding-top: 10vh;
+      }
+      .footer-center-divs{
+        background-color: aquamarine;
+      }
+    }
+  }
 }
