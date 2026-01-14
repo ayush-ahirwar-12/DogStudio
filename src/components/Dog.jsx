@@ -1,8 +1,4 @@
-import {
-  useGLTF,
-  useTexture,
-  useAnimations,
-} from "@react-three/drei";
+import { useGLTF, useTexture, useAnimations } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { useEffect } from "react";
 import * as THREE from "three";
@@ -15,7 +11,7 @@ const Dog = () => {
   gsap.registerPlugin(useGSAP());
   gsap.registerPlugin(ScrollTrigger);
 
-  const model = useGLTF("/models/dog.drc.glb");  
+  const model = useGLTF("/models/dog.drc.glb");
 
   useThree(({ camera, scene, gl }) => {
     camera.position.z = 0.45;
@@ -85,10 +81,10 @@ const Dog = () => {
     "/branches_normals.jpeg",
     "/branches_diffuse.jpeg",
   ]).map((texture) => {
+    texture.flipY = false;
     // texture.colorSpace = THREE.SRGBColorSpace;
     return texture;
   });
-
 
   const DogMaterial = new THREE.MeshMatcapMaterial({
     normalMap: normalMap,
@@ -101,23 +97,21 @@ const Dog = () => {
   });
 
   const EyeMaterial = new THREE.MeshMatcapMaterial({
-    normalMap:normalMap,
-    matcap:mat1
-  })
+    normalMap: normalMap,
+    matcap: mat1,
+  });
 
-    const material = useRef({
+  const material = useRef({
     uMatcap1: { value: mat19 },
     uMatcap2: { value: mat2 },
     uProgress: { value: 2.0 },
   });
 
   const material2 = useRef({
-    uMatcap1:{value:mat19},
-    uMatcap2:{value:mat1},
-    uProgress:{value:2.0}
-  })
-
-
+    uMatcap1: { value: mat19 },
+    uMatcap2: { value: mat1 },
+    uProgress: { value: 2.0 },
+  });
 
   function onBeforeCompile(shader) {
     shader.uniforms.uMatcapTexture1 = material.current.uMatcap1;
@@ -150,7 +144,7 @@ const Dog = () => {
         `
     );
   }
-    function onBeforeCompileEye(shader) {
+  function onBeforeCompileEye(shader) {
     shader.uniforms.uMatcapTexture1 = material2.current.uMatcap1;
     shader.uniforms.uMatcapTexture2 = material2.current.uMatcap2;
     shader.uniforms.uProgress = material2.current.uProgress;
@@ -184,17 +178,15 @@ const Dog = () => {
 
   DogMaterial.onBeforeCompile = onBeforeCompile;
   BranchMaterial.onBeforeCompile = onBeforeCompile;
-  EyeMaterial.onBeforeCompile = onBeforeCompileEye
+  EyeMaterial.onBeforeCompile = onBeforeCompileEye;
 
   model.scene.traverse((child) => {
-    
     if (child.name.includes("DOG")) {
       console.log(child.name);
-      
+
       child.material = DogMaterial;
-      if(child.name.includes("RIGDOGSTUDIO")){
-        child.material = EyeMaterial
-       
+      if (child.name.includes("RIGDOGSTUDIO")) {
+        child.material = EyeMaterial;
       }
     } else {
       child.material = BranchMaterial;
@@ -243,16 +235,16 @@ const Dog = () => {
       .querySelector(`.center-headings[img-title="tomorrowland"]`)
       .addEventListener("mouseenter", () => {
         material.current.uMatcap1.value = mat19;
-        EyeMaterial.matcap = mat19
-        // material2.current.uMatcap1.value = mat19
+        material2.current.uMatcap1.value = mat19;
         gsap.to(material.current.uProgress, {
           value: 0.0,
-          duration: 0.5,
+          duration: 0.0,
           onComplete: () => {
-            (material.current.uMatcap2.value = material.current.uMatcap1.value),
-            // (material2.current.uMatcap2.value = material2.current.uMatcap1.value),
-
-              (material.current.uProgress = 1.0);
+            (material.current.uMatcap2.value =
+              material.current.uMatcap1.value) &&
+              (material2.current.uMatcap2.value =
+                material2.current.uMatcap1.value),
+              (material.current.uProgress = 2.0);
           },
         });
       });
@@ -261,12 +253,17 @@ const Dog = () => {
       .querySelector(`.center-headings[img-title="navy-pier"]`)
       .addEventListener("mouseenter", () => {
         material.current.uMatcap1.value = mat8;
+        material2.current.uMatcap1.value = mat8;
+
         gsap.to(material.current.uProgress, {
           value: 0.0,
-          duration: 1.0,
+          duration: 0.0,
           onComplete: () => {
-            (material.current.uMatcap2.value = material.current.uMatcap1.value),
-              (material.current.uProgress = 1.0);
+            (material.current.uMatcap2.value =
+              material.current.uMatcap1.value) &&
+              (material2.current.uMatcap2.value =
+                material2.current.uMatcap1.value),
+              (material.current.uProgress = 2.0);
           },
         });
       });
@@ -275,12 +272,16 @@ const Dog = () => {
       .querySelector(`.center-headings[img-title="chicago"]`)
       .addEventListener("mouseenter", () => {
         material.current.uMatcap1.value = mat9;
+        material2.current.uMatcap1.value = mat9;
         gsap.to(material.current.uProgress, {
           value: 0.0,
-          duration: 1.0,
+          duration: 0.0,
           onComplete: () => {
-            (material.current.uMatcap2.value = material.current.uMatcap1.value),
-              (material.current.uProgress = 1.0);
+            (material.current.uMatcap2.value =
+              material.current.uMatcap1.value) &&
+              (material2.current.uMatcap2.value =
+                material2.current.uMatcap1.value),
+              (material.current.uProgress = 2.0);
           },
         });
       });
@@ -289,12 +290,16 @@ const Dog = () => {
       .querySelector(`.center-headings[img-title="phone"]`)
       .addEventListener("mouseenter", () => {
         material.current.uMatcap1.value = mat12;
+        material2.current.uMatcap1.value = mat12;
         gsap.to(material.current.uProgress, {
           value: 0.0,
-          duration: 1.0,
+          duration: 0.0,
           onComplete: () => {
-            (material.current.uMatcap2.value = material.current.uMatcap1.value),
-              (material.current.uProgress = 1.0);
+            (material.current.uMatcap2.value =
+              material.current.uMatcap1.value) &&
+              (material2.current.uMatcap2.value =
+                material2.current.uMatcap1.value),
+              (material.current.uProgress = 2.0);
           },
         });
       });
@@ -303,12 +308,16 @@ const Dog = () => {
       .querySelector(`.center-headings[img-title="kikk"]`)
       .addEventListener("mouseenter", () => {
         material.current.uMatcap1.value = mat10;
+        material2.current.uMatcap1.value = mat10;
         gsap.to(material.current.uProgress, {
           value: 0.0,
-          duration: 1.0,
+          duration: 0.0,
           onComplete: () => {
-            (material.current.uMatcap2.value = material.current.uMatcap1.value),
-              (material.current.uProgress = 1.0);
+            (material.current.uMatcap2.value =
+              material.current.uMatcap1.value) &&
+              (material2.current.uMatcap2.value =
+                material2.current.uMatcap1.value),
+              (material.current.uProgress = 2.0);
           },
         });
       });
@@ -317,12 +326,16 @@ const Dog = () => {
       .querySelector(`.center-headings[img-title="kennedy"]`)
       .addEventListener("mouseenter", () => {
         material.current.uMatcap1.value = mat17;
+        material2.current.uMatcap1.value = mat17;
         gsap.to(material.current.uProgress, {
           value: 0.0,
-          duration: 1.0,
+          duration: 0.0,
           onComplete: () => {
-            (material.current.uMatcap2.value = material.current.uMatcap1.value),
-              (material.current.uProgress = 1.0);
+            (material.current.uMatcap2.value =
+              material.current.uMatcap1.value) &&
+              (material2.current.uMatcap2.value =
+                material2.current.uMatcap1.value),
+              (material.current.uProgress = 2.0);
           },
         });
       });
@@ -331,30 +344,37 @@ const Dog = () => {
       .querySelector(`.center-headings[img-title="opera"]`)
       .addEventListener("mouseenter", () => {
         material.current.uMatcap1.value = mat13;
+        material2.current.uMatcap1.value = mat13;
         gsap.to(material.current.uProgress, {
           value: 0.0,
-          duration: 1.0,
+          duration: 0.0,
           onComplete: () => {
-            (material.current.uMatcap2.value = material.current.uMatcap1.value),
-              (material.current.uProgress = 1.0);
-          },
-        });
-      });
-      document
-      .querySelector(`#section2-center`)
-      .addEventListener("mouseleave", () => {
-        material.current.uMatcap1.value = mat2;
-        EyeMaterial.matcap = mat1;
-        gsap.to(material.current.uProgress, {
-          value: 0.0,
-          duration: 1.0,
-          onComplete: () => {
-            (material.current.uMatcap2.value = material.current.uMatcap1.value),
+            (material.current.uMatcap2.value =
+              material.current.uMatcap1.value) &&
+              (material2.current.uMatcap2.value =
+                material2.current.uMatcap1.value),
               (material.current.uProgress = 2.0);
           },
         });
-      }); 
-  },[]);
+      });
+    document
+      .querySelector(`#section2-center`)
+      .addEventListener("mouseleave", () => {
+        material.current.uMatcap1.value = mat2;
+        material2.current.uMatcap1.value = mat1;
+        gsap.to(material.current.uProgress, {
+          value: 0.0,
+          duration: 0.0,
+          onComplete: () => {
+            (material.current.uMatcap2.value =
+              material.current.uMatcap1.value) &&
+              (material2.current.uMatcap2.value =
+                material2.current.uMatcap1.value),
+              (material.current.uProgress = 2.0);
+          },
+        });
+      });
+  }, []);
 
   return (
     <>
@@ -363,8 +383,8 @@ const Dog = () => {
         position={[0.2, -0.55, 0]}
         rotation={[0, Math.PI / 5, 0]}
       />
-      <directionalLight positon={[0,5,5]} color={0xFFFFFF} intensity={10} />
-      
+      <directionalLight positon={[0, 5, 5]} color={0xffffff} intensity={10} />
+
       {/* <ambientLight positon={[0,5,5]} color={0xFFFFFF} intensity={10} /> */}
 
       {/* <OrbitControls/> */}
