@@ -196,15 +196,17 @@ const Dog = () => {
   const dogModel = useRef(model);
 
   useGSAP(() => {
+    if(!dogModel.current?.scene) return ;
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: "nav",
-        endTrigger: "#section3",
+        endTrigger: "#section4",
         start: "top top",
         end: "bottom bottom",
         scrub: true,
       },
     });
+
     tl.to(dogModel.current.scene.position, {
       z: "-=0.40",
     });
@@ -228,6 +230,9 @@ const Dog = () => {
       },
       "three"
     );
+    tl.to("#canvas", {
+      "--imgOpacity": 0,
+    });
   }, []);
 
   useEffect(() => {

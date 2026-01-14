@@ -7,13 +7,13 @@ html,
 body,
 #root {
   width: 100%;
-  background-color: black;
+  background-color: #15161B;
 }
 main {
   position: relative;
 }
 section {
-  min-height: 100vh;
+  /* min-height: 100vh; */
   position: relative;
   z-index: 2;
 }
@@ -152,17 +152,18 @@ nav {
 
 #canvas::after {
   content: "";
-  width: 100%;
-  height: 100%;
   position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0;
   z-index: -1;
+
   background-image: url(/background-xxs.png);
   background-repeat: no-repeat;
   background-size: cover;
-  transition: all 0.3s linear;
+  background-position: center;
+
+  opacity: var(--imgOpacity, 1);
 }
+
 
 main:has(#section2 .center-headings:hover) #canvas::after {
   opacity: 0;
@@ -253,14 +254,29 @@ main:has(#section2 .center-headings[img-title="opera"]:hover)
       color: grey;
 
     }
-    h1{
-      color:white;
+h1 {
+  position: relative;
+  color: white;
+  font-size: 3vw;
+  width: 60%;
+  font-weight: 100;
+  margin-top: 3rem;
+  padding: 1rem 2rem;
+  z-index: 1;
+}
 
-      font-size: 3vw;
-      width: 60%;
-      font-weight: 100;
-      margin-top: 3rem;
-    }
+h1::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /* background: rgba(255, 255, 255, 0.25); */
+  filter: blur(25px);
+  background-image: url(/background-xxs.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: -1;
+  border-radius:150px;
+}
   }
     #right-bottom{
     width: 50%;
@@ -271,10 +287,11 @@ main:has(#section2 .center-headings[img-title="opera"]:hover)
 #section4{
   display: flex;
   position: relative;
+
   #left-bottom{
     width: 50%;
 
-    height: 100vh;
+    /* height: 100vh; */
     h6{
       color: grey;
 
@@ -290,6 +307,13 @@ main:has(#section2 .center-headings[img-title="opera"]:hover)
   }
     #right-bottom{
     width: 50%;
-    height: 100vh;
+    /* height: 100vh; */
+    display: flex;
+    gap: 4rem;
+    p{
+      line-height: 1.5;
+      width: 28%;
+      color: rgba(255, 255, 255, 0.39);
+    }
   }
 }
