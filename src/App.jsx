@@ -141,9 +141,13 @@ const App = () => {
           </div>
         </div>
       </div>
-      <section id="section3"></section>
-      <section id="section4"></section>
-      <section id="section5"></section>
+      <section id="section3">
+        <div id="left-bottom">
+          <h6>THIS IS HOW WE DO IT</h6>
+          <h1>We're crafting emotional experiences aimed at improving results</h1>
+        </div>
+        <div id="right-bottom"></div>
+      </section>
     </main>
   );
 };
