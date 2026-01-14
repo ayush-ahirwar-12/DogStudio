@@ -144,9 +144,29 @@ const App = () => {
       <section id="section3">
         <div id="left-bottom">
           <h6>THIS IS HOW WE DO IT</h6>
-          <h1>We're crafting emotional experiences aimed at improving results</h1>
+          <h1>
+            We're crafting emotional experiences aimed at improving results
+          </h1>
         </div>
-        <div id="right-bottom"></div>
+
+      </section>
+      <section id="section4">
+        <div id="left-bottom">
+        </div>
+        <div id="right-bottom">
+          <p>
+            Dogstudio is a design & technology firm working globally from our
+            offices based in Belgium and Chicago. Our strong focus on producing
+            high quality & emotional brandings, digital products and experiences
+            became a signature.
+          </p>
+          <p>
+            We’re passionate about moving people and solving problems for the
+            likes of Microsoft, The Museum of Science And Industry Of Chicago,
+            The Kennedy Center of Washington, Dragone, Quanta Magazine, and many
+            more.
+          </p>
+        </div>
       </section>
     </main>
   );

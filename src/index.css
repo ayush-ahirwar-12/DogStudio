@@ -242,7 +242,35 @@ main:has(#section2 .center-headings[img-title="opera"]:hover)
   padding-inline: 10vw;
   position: relative;
   z-index: 0;
+  isolation: isolate;
+  min-height: initial;
 
+  #left-bottom{
+    width: 50%;
+
+    /* height: 100vh; */
+    h6{
+      color: grey;
+
+    }
+    h1{
+      color:white;
+
+      font-size: 3vw;
+      width: 60%;
+      font-weight: 100;
+      margin-top: 3rem;
+    }
+  }
+    #right-bottom{
+    width: 50%;
+    height: 100vh;
+  }
+}
+
+#section4{
+  display: flex;
+  position: relative;
   #left-bottom{
     width: 50%;
 
@@ -263,6 +291,5 @@ main:has(#section2 .center-headings[img-title="opera"]:hover)
     #right-bottom{
     width: 50%;
     height: 100vh;
-    background-color: aliceblue;
   }
 }
