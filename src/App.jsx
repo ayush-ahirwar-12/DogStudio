@@ -23,7 +23,6 @@ const App = () => {
           top: 0,
           left: 0,
           zIndex: 1,
-          
         }}
       >
         <Dog />
@@ -149,31 +148,34 @@ const App = () => {
             We're crafting emotional experiences aimed at improving results
           </h1>
         </div>
-
       </section>
+
+
       <section id="section4">
+        <div id="line3"></div>
         <div id="section4-center">
-        <div id="left-bottom">
-        </div>
-        <div id="right-bottom">
-          <p>
-            Dogstudio is a design & technology firm working globally from our
-            offices based in Belgium and Chicago. Our strong focus on producing
-            high quality & emotional brandings, digital products and experiences
-            became a signature.
-          </p>
-          <p>
-            We’re passionate about moving people and solving problems for the
-            likes of Microsoft, The Museum of Science And Industry Of Chicago,
-            The Kennedy Center of Washington, Dragone, Quanta Magazine, and many
-            more.
-          </p>
-        </div>
+          <div id="left-bottom"></div>
+          <div id="right-bottom">
+            <p>
+              Dogstudio is a design & technology firm working globally from our
+              offices based in Belgium and Chicago. Our strong focus on
+              producing high quality & emotional brandings, digital products and
+              experiences became a signature.
+            </p>
+            <p>
+              We’re passionate about moving people and solving problems for the
+              likes of Microsoft, The Museum of Science And Industry Of Chicago,
+              The Kennedy Center of Washington, Dragone, Quanta Magazine, and
+              many more.
+            </p>
+          </div>
         </div>
         <div id="section4-bottom">
+          <div id="section4-bottom-left"></div>
+          <div id="section4-bottom-right">
             <h1>Discover our values </h1>
+          </div>
         </div>
-        
       </section>
     </main>
   );
