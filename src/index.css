@@ -285,8 +285,19 @@ h1::before {
 }
 
 #section4{
-  display: flex;
   position: relative;
+  background-color: blueviolet;
+
+  #section4-center{
+    display: flex;
+  }
+  #section4-bottom{
+    padding-bottom: 10rem;
+    h1{
+      font-size: 1.3rem;
+      text-align: center;
+    }
+  }
 
   #left-bottom{
     width: 50%;

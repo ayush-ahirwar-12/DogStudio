@@ -210,9 +210,16 @@ const Dog = () => {
     tl.to(dogModel.current.scene.position, {
       z: "-=0.40",
     });
+
     tl.to(dogModel.current.scene.rotation, {
       x: `+=${Math.PI / 16}`,
     });
+         tl.fromTo(
+    "#canvas",
+    { "--imgOpacity": 1 },
+    { "--imgOpacity": 0 },
+    "three"
+  );
     tl.to(
       dogModel.current.scene.rotation,
       {
@@ -230,9 +237,7 @@ const Dog = () => {
       },
       "three"
     );
-    tl.to("#canvas", {
-      "--imgOpacity": 0,
-    });
+
   }, []);
 
   useEffect(() => {

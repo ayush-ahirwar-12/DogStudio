@@ -152,6 +152,7 @@ const App = () => {
 
       </section>
       <section id="section4">
+        <div id="section4-center">
         <div id="left-bottom">
         </div>
         <div id="right-bottom">
@@ -168,6 +169,11 @@ const App = () => {
             more.
           </p>
         </div>
+        </div>
+        <div id="section4-bottom">
+            <h1>Discover our values </h1>
+        </div>
+        
       </section>
     </main>
   );
