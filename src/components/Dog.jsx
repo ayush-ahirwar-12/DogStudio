@@ -433,7 +433,7 @@ const Dog = () => {
           // ref={dogRef}
           object={model.scene}
           position={[0.2, -0.55, 0]}
-          rotation={[0,Math.PI/5,0]}
+          rotation={[0,Math.PI/6,0]}
         />
       <directionalLight positon={[0, 5, 5]} color={0xffffff} intensity={10} />
 
