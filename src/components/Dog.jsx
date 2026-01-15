@@ -383,17 +383,6 @@ const Dog = () => {
       });
   }, []);
 
-  // useGSAP(()=>{
-  //   const main = document.querySelector("main");
-  //   const handleMouseMove = (e)=>{
-  //     const xMove = (e.clientX / window.innerWidth - 0.5) *40;
-  //     gsap.to(dogModel.current.scene.rotation,{
-  //       x:xMove
-  //     })
-  //   }
-  //   main.addEventListener("mousemove",handleMouseMove);
-  // })
-
   const mouse = useRef({x:0,y:0});
 
   useEffect(()=>{
@@ -424,15 +413,17 @@ const Dog = () => {
     0.1
   );
   })
+const baseRotation = useRef(new THREE.Euler(0, Math.PI / 5, 0));
 
   return (
     <>
+    <group ref={groupRef}>
       <primitive
         ref={dogRef}
         object={model.scene}
         position={[0.2, -0.55, 0]}
-        rotation={[0, Math.PI / 5, 0]}
       />
+      </group>
       <directionalLight positon={[0, 5, 5]} color={0xffffff} intensity={10} />
 
       {/* <OrbitControls/> */}
