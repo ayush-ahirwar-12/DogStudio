@@ -14,7 +14,7 @@ const Dog = () => {
   const model = useGLTF("/models/dog.drc.glb");
 
   useThree(({ camera, scene, gl }) => {
-    camera.position.z = 0.45;
+    camera.position.z = 0.42;
     gl.toneMapping = THREE.ReinhardToneMapping;
     gl.outputColorSpace = THREE.SRGBColorSpace;
   });
@@ -196,10 +196,11 @@ const Dog = () => {
   const dogModel = useRef(model);
 
   useGSAP(() => {
-    if(!dogModel.current?.scene) return ;
+    if (!dogModel.current?.scene) return;
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: "nav",
+        duration:1,
         endTrigger: "#section4",
         start: "top top",
         end: "bottom bottom",
@@ -214,12 +215,7 @@ const Dog = () => {
     tl.to(dogModel.current.scene.rotation, {
       x: `+=${Math.PI / 16}`,
     });
-         tl.fromTo(
-    "#canvas",
-    { "--imgOpacity": 1 },
-    { "--imgOpacity": 0 },
-    "three"
-  );
+    tl.fromTo("#canvas", { "--imgOpacity": 1 }, { "--imgOpacity": 0 }, "three");
     tl.to(
       dogModel.current.scene.rotation,
       {
@@ -237,7 +233,6 @@ const Dog = () => {
       },
       "three"
     );
-
   }, []);
 
   useEffect(() => {
@@ -386,16 +381,18 @@ const Dog = () => {
       });
   }, []);
 
+  useGSAP(()=>{
+    
+  })
+
   return (
     <>
       <primitive
         object={model.scene}
         position={[0.2, -0.55, 0]}
-        rotation={[0, Math.PI / 5, 0]}
+        rotation={[0, Math.PI / 6, 0]}
       />
       <directionalLight positon={[0, 5, 5]} color={0xffffff} intensity={10} />
-
-      {/* <ambientLight positon={[0,5,5]} color={0xFFFFFF} intensity={10} /> */}
 
       {/* <OrbitControls/> */}
     </>
