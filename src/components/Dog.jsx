@@ -13,7 +13,7 @@ const Dog = () => {
 
   const model = useGLTF("/models/dog.drc.glb");
   const dogRef = useRef();
-  const groupRef = useRef();
+  // const groupRef = useRef();
 
   const baseRotation = useRef(new THREE.Euler(0, Math.PI / 5, 0));
 
@@ -224,6 +224,9 @@ const Dog = () => {
       {
         x: `-=${Math.PI / 60}`,
         y: `-=${Math.PI}`,
+        // onUpdate:()=>{
+        //     baseRotation.current.copy(dogModel.current.scene.rotation);
+        // }
       },
       "three"
     );
@@ -384,48 +387,54 @@ const Dog = () => {
       });
   }, []);
 
-  const mouse = useRef({ x: 0, y: 0 });
+  // const mouse = useRef({ x: 0, y: 0 });
 
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      mouse.current.x = (e.clientX / window.innerWidth) * 2 - 1;
-      mouse.current.y = -(e.clientY / window.innerHeight) * 2 + 1;
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
+  // useEffect(() => {
+  //   const handleMouseMove = (e) => {
+  //     mouse.current.x = (e.clientX / window.innerWidth) * 2 - 1;
+  //     mouse.current.y = -(e.clientY / window.innerHeight) * 2 + 1;
+  //   };
+  //   window.addEventListener("mousemove", handleMouseMove);
+  //   return () => window.removeEventListener("mousemove", handleMouseMove);
+  // }, []);
 
-  useFrame((state, delta) => {
-    if (!dogRef.current) return;
+// useFrame(() => {
+//   if (!dogRef.current) return;
 
-    const targetY = baseRotation.current.y + mouse.current.x * 0.35;
-    const targetX = baseRotation.current.x + mouse.current.y * 0.15;
+//   const mouseX = mouse.current.x;
+//   const mouseY = mouse.current.y;
 
-    dogRef.current.rotation.y = THREE.MathUtils.lerp(
-    dogRef.current.rotation.y,
-    targetY,
-    0.01
-  );
+//   /** 🔥 Reduce rotation when mouse goes UP */
+//   const upFactor = mouseY > 0 ? 0.2 : 1; // 0 = no rotation, 0.2 = very less
 
+//   const targetY =
+//     baseRotation.current.y + mouseX * 0.10 * upFactor;
 
-  dogRef.current.rotation.x = THREE.MathUtils.lerp(
-    dogRef.current.rotation.x,
-    targetX,
-    0.01
-  );
+//   const targetX =
+//     baseRotation.current.x + mouseY * 0.10 * upFactor;
 
+//   dogRef.current.rotation.y = THREE.MathUtils.lerp(
+//     dogRef.current.rotation.y,
+//     targetY,
+//     0.02
+//   );
 
-  });
+//   dogRef.current.rotation.x = THREE.MathUtils.lerp(
+//     dogRef.current.rotation.x,
+//     targetX,
+//     0.02
+//   );
+// });
+
 
   return (
     <>
-      <group ref={groupRef}>
         <primitive
-          ref={dogRef}
+          // ref={dogRef}
           object={model.scene}
           position={[0.2, -0.55, 0]}
+          rotation={[0,Math.PI/5,0]}
         />
-      </group>
       <directionalLight positon={[0, 5, 5]} color={0xffffff} intensity={10} />
 
       {/* <OrbitControls/> */}
