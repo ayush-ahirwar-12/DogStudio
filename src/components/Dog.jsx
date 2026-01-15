@@ -1,5 +1,5 @@
 import { useGLTF, useTexture, useAnimations } from "@react-three/drei";
-import { useThree } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import { useEffect } from "react";
 import * as THREE from "three";
 import gsap from "gsap";
@@ -12,6 +12,9 @@ const Dog = () => {
   gsap.registerPlugin(ScrollTrigger);
 
   const model = useGLTF("/models/dog.drc.glb");
+  const dogRef = useRef();
+  const groupRef = useRef();
+
 
   useThree(({ camera, scene, gl }) => {
     camera.position.z = 0.42;
@@ -182,7 +185,6 @@ const Dog = () => {
 
   model.scene.traverse((child) => {
     if (child.name.includes("DOG")) {
-      console.log(child.name);
 
       child.material = DogMaterial;
       if (child.name.includes("RIGDOGSTUDIO")) {
@@ -381,16 +383,55 @@ const Dog = () => {
       });
   }, []);
 
-  useGSAP(()=>{
+  // useGSAP(()=>{
+  //   const main = document.querySelector("main");
+  //   const handleMouseMove = (e)=>{
+  //     const xMove = (e.clientX / window.innerWidth - 0.5) *40;
+  //     gsap.to(dogModel.current.scene.rotation,{
+  //       x:xMove
+  //     })
+  //   }
+  //   main.addEventListener("mousemove",handleMouseMove);
+  // })
+
+  const mouse = useRef({x:0,y:0});
+
+  useEffect(()=>{
+    const handleMouseMove = (e)=>{
+      mouse.current.x = (e.clientX / window.innerWidth) * 2-1;
+      mouse.current.y = -(e.clientY / window.innerHeight) * 2+1;
+
+    }
+    window.addEventListener("mousemove",handleMouseMove);
+    return ()=>window.removeEventListener("mousemove",handleMouseMove);
+  },[])
+
+  useFrame((state,delta)=>{
+    if(!dogRef.current) return;
+
+    const targetRotationY = mouse.current.x*0.4;
+    const targetRotationX = mouse.current.y*0.2;
+
+    dogRef.current.rotation.y = THREE.MathUtils.lerp(
+      dogRef.current.rotation.y,
+      targetRotationY,
+      0.1
+    ) 
     
+    dogRef.current.rotation.x = THREE.MathUtils.lerp(
+    dogRef.current.rotation.x,
+    targetRotationX,
+    0.1
+  );
   })
 
   return (
     <>
       <primitive
+        ref={dogRef}
         object={model.scene}
         position={[0.2, -0.55, 0]}
-        rotation={[0, Math.PI / 6, 0]}
+        rotation={[0, Math.PI / 5, 0]}
       />
       <directionalLight positon={[0, 5, 5]} color={0xffffff} intensity={10} />
 
