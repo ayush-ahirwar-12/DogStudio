@@ -15,6 +15,8 @@ const Dog = () => {
   const dogRef = useRef();
   const groupRef = useRef();
 
+  const baseRotation = useRef(new THREE.Euler(0, Math.PI / 5, 0));
+
 
   useThree(({ camera, scene, gl }) => {
     camera.position.z = 0.42;
@@ -185,7 +187,6 @@ const Dog = () => {
 
   model.scene.traverse((child) => {
     if (child.name.includes("DOG")) {
-
       child.material = DogMaterial;
       if (child.name.includes("RIGDOGSTUDIO")) {
         child.material = EyeMaterial;
@@ -202,7 +203,7 @@ const Dog = () => {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: "nav",
-        duration:1,
+        duration: 1,
         endTrigger: "#section4",
         start: "top top",
         end: "bottom bottom",
@@ -383,46 +384,47 @@ const Dog = () => {
       });
   }, []);
 
-  const mouse = useRef({x:0,y:0});
+  const mouse = useRef({ x: 0, y: 0 });
 
-  useEffect(()=>{
-    const handleMouseMove = (e)=>{
-      mouse.current.x = (e.clientX / window.innerWidth) * 2-1;
-      mouse.current.y = -(e.clientY / window.innerHeight) * 2+1;
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      mouse.current.x = (e.clientX / window.innerWidth) * 2 - 1;
+      mouse.current.y = -(e.clientY / window.innerHeight) * 2 + 1;
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
 
-    }
-    window.addEventListener("mousemove",handleMouseMove);
-    return ()=>window.removeEventListener("mousemove",handleMouseMove);
-  },[])
+  useFrame((state, delta) => {
+    if (!dogRef.current) return;
 
-  useFrame((state,delta)=>{
-    if(!dogRef.current) return;
-
-    const targetRotationY = mouse.current.x*0.4;
-    const targetRotationX = mouse.current.y*0.2;
+    const targetY = baseRotation.current.y + mouse.current.x * 0.35;
+    const targetX = baseRotation.current.x + mouse.current.y * 0.15;
 
     dogRef.current.rotation.y = THREE.MathUtils.lerp(
-      dogRef.current.rotation.y,
-      targetRotationY,
-      0.1
-    ) 
-    
-    dogRef.current.rotation.x = THREE.MathUtils.lerp(
-    dogRef.current.rotation.x,
-    targetRotationX,
-    0.1
+    dogRef.current.rotation.y,
+    targetY,
+    0.01
   );
-  })
-const baseRotation = useRef(new THREE.Euler(0, Math.PI / 5, 0));
+
+
+  dogRef.current.rotation.x = THREE.MathUtils.lerp(
+    dogRef.current.rotation.x,
+    targetX,
+    0.01
+  );
+
+
+  });
 
   return (
     <>
-    <group ref={groupRef}>
-      <primitive
-        ref={dogRef}
-        object={model.scene}
-        position={[0.2, -0.55, 0]}
-      />
+      <group ref={groupRef}>
+        <primitive
+          ref={dogRef}
+          object={model.scene}
+          position={[0.2, -0.55, 0]}
+        />
       </group>
       <directionalLight positon={[0, 5, 5]} color={0xffffff} intensity={10} />
 
