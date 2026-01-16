@@ -15,13 +15,24 @@ const Dog = () => {
   const dogRef = useRef();
   const { viewport, size } = useThree();
 
+  const isMobile = size.width < 768;
+  const modelScale = isMobile ? 0.8 : 1;
+  const modelPosition = isMobile ? [0.1, -0.5, 0.1] : [0.2, -0.55, 0];
+
+  const modelRotation = isMobile ? [0, Math.PI / 6, 0] : [0, Math.PI / 6, 0];
+
+  const rotationConfig = {
+  xIntro: isMobile ? Math.PI / 32 : Math.PI / 16,
+  xOutro: isMobile ? Math.PI / 80 : Math.PI / 60,
+  yRotate: isMobile ? Math.PI / 2 : Math.PI,
+};
+
   // const groupRef = useRef();
 
   const baseRotation = useRef(new THREE.Euler(0, Math.PI / 5, 0));
 
-
-  useThree(({ camera,size ,scene, gl }) => {
-    camera.position.z = size.width<768?0.7:0.42;
+  useThree(({ camera, size, scene, gl }) => {
+    camera.position.z = size.width < 768 ? 0.7 : 0.42;
     gl.toneMapping = THREE.ReinhardToneMapping;
     gl.outputColorSpace = THREE.SRGBColorSpace;
   });
@@ -200,48 +211,67 @@ const Dog = () => {
 
   const dogModel = useRef(model);
 
-  useGSAP(() => {
-    if (!dogModel.current?.scene) return;
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: "nav",
-        duration: 1,
-        endTrigger: "#section4",
-        start: "top top",
-        end: "bottom bottom",
-        scrub: true,
-      },
-    });
-    const zMove = size.width < 768 ? 0.2 : 0.4;
-    tl.to(dogModel.current.scene.position, {
-      z: `-=${zMove}`,
-    });
+ useGSAP(() => {
+  if (!dogModel.current?.scene) return;
 
-    tl.to(dogModel.current.scene.rotation, {
-      x: `+=${Math.PI / 16}`,
-    });
-    tl.fromTo("#canvas", { "--imgOpacity": 1 }, { "--imgOpacity": 0 }, "three");
-    tl.to(
-      dogModel.current.scene.rotation,
-      {
-        x: `-=${Math.PI / 60}`,
-        y: size.width < 768 ? `-=${Math.PI / 2}` : `-=${Math.PI}`,
-        // onUpdate:()=>{
-        //     baseRotation.current.copy(dogModel.current.scene.rotation);
-        // }
-      },
-      "three"
-    );
-    tl.to(
-      dogModel.current.scene.position,
-      {
-        z: "+=0.20",
-        x: "-=0.6",
-        y: "+=0.13",
-      },
-      "three"
-    );
-  }, []);
+  const scene = dogModel.current.scene;
+
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: "nav",
+      start: "top top",
+      endTrigger: "#section4",
+      end: "bottom bottom",
+      scrub: 1,
+      invalidateOnRefresh: true,
+    },
+  });
+
+  const zMove = isMobile ? 0.2 : 0.4;
+
+  tl.to(scene.position, {
+    z: -zMove,
+    ease: "none",
+  });
+
+  tl.to(scene.rotation, {
+    x: rotationConfig.xIntro,
+    ease: "none",
+  });
+
+  tl.fromTo(
+    "#canvas",
+    { "--imgOpacity": 1 },
+    { "--imgOpacity": 0, ease: "none" },
+    "three"
+  );
+
+  tl.to(
+    scene.rotation,
+    {
+      x: rotationConfig.xIntro - rotationConfig.xOutro,
+      y: -rotationConfig.yRotate,
+      ease: "none",
+    },
+    "three"
+  );
+
+  tl.to(
+    scene.position,
+    {
+      z: isMobile ? 0.1 : 0.2,
+      x: isMobile ? -0.3 : -0.6,
+      y: isMobile ? 0.08 : 0.13,
+      ease: "none",
+    },
+    "three"
+  );
+}, [size.width]);
+
+useEffect(() => {
+  ScrollTrigger.refresh();
+}, [size.width]);
+
 
   useEffect(() => {
     document
@@ -400,55 +430,43 @@ const Dog = () => {
   //   return () => window.removeEventListener("mousemove", handleMouseMove);
   // }, []);
 
-// useFrame(() => {
-//   if (!dogRef.current) return;
+  // useFrame(() => {
+  //   if (!dogRef.current) return;
 
-//   const mouseX = mouse.current.x;
-//   const mouseY = mouse.current.y;
+  //   const mouseX = mouse.current.x;
+  //   const mouseY = mouse.current.y;
 
-//   /** 🔥 Reduce rotation when mouse goes UP */
-//   const upFactor = mouseY > 0 ? 0.2 : 1; // 0 = no rotation, 0.2 = very less
+  //   /** 🔥 Reduce rotation when mouse goes UP */
+  //   const upFactor = mouseY > 0 ? 0.2 : 1; // 0 = no rotation, 0.2 = very less
 
-//   const targetY =
-//     baseRotation.current.y + mouseX * 0.10 * upFactor;
+  //   const targetY =
+  //     baseRotation.current.y + mouseX * 0.10 * upFactor;
 
-//   const targetX =
-//     baseRotation.current.x + mouseY * 0.10 * upFactor;
+  //   const targetX =
+  //     baseRotation.current.x + mouseY * 0.10 * upFactor;
 
-//   dogRef.current.rotation.y = THREE.MathUtils.lerp(
-//     dogRef.current.rotation.y,
-//     targetY,
-//     0.02
-//   );
+  //   dogRef.current.rotation.y = THREE.MathUtils.lerp(
+  //     dogRef.current.rotation.y,
+  //     targetY,
+  //     0.02
+  //   );
 
-//   dogRef.current.rotation.x = THREE.MathUtils.lerp(
-//     dogRef.current.rotation.x,
-//     targetX,
-//     0.02
-//   );
-// });
-
-const isMobile = size.width < 768;
-const modelScale = isMobile ? 0.8 : 1;
-const modelPosition = isMobile
-  ? [0, -0.7, 0.1]
-  : [0.2, -0.55, 0];
-
-const modelRotation = isMobile
-  ? [0, Math.PI / 10, 0]
-  : [0, Math.PI / 6, 0];
-
-
+  //   dogRef.current.rotation.x = THREE.MathUtils.lerp(
+  //     dogRef.current.rotation.x,
+  //     targetX,
+  //     0.02
+  //   );
+  // });
 
   return (
     <>
-        <primitive
-          // ref={dogRef}
-          object={model.scene}
-          scale={modelScale}
-          position={modelPosition}
-          rotation={modelRotation}
-        />
+      <primitive
+        // ref={dogRef}
+        object={model.scene}
+        scale={modelScale}
+        position={modelPosition}
+        rotation={modelRotation}
+      />
       <directionalLight positon={[0, 5, 5]} color={0xffffff} intensity={10} />
 
       {/* <OrbitControls/> */}
