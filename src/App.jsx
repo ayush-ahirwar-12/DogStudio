@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import Dog from "./components/Dog";
 
 const App = () => {
+
   return (
     <main>
       <div className="images">
