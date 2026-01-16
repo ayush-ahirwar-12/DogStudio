@@ -8,26 +8,33 @@ body,
 #root {
   width: 100%;
   background-color: #15161b;
+  overflow-x: hidden; /* Prevents horizontal scroll on mobile */
 }
 main {
   position: relative;
 }
 section {
-  /* min-height: 100vh; */
   position: relative;
   z-index: 2;
 }
 
+/* ******************** */
+/* Section 1 */
+/* ******************** */
 #section1 {
+  min-height: 120vh;
+  
   nav {
     display: flex;
     color: white;
     align-items: center;
     justify-content: space-between;
     padding: 2rem 3rem;
-    font-size: 1vw;
+    font-size: 1rem;
     position: sticky;
-    z-index: 2;
+    top: 0;
+    z-index: 10;
+    
     svg {
       width: 100%;
       height: 100%;
@@ -36,12 +43,16 @@ section {
       padding: 1vw 0;
       max-width: 7rem;
     }
+    .showreel {
+      margin-right: 9rem; /* Desktop only margin */
+    }
   }
+
   .section1center {
     display: flex;
+    width: 100%;
   }
-  min-height: 120vh;
-  /* display: flex; */
+
   .top-center-left {
     width: 50%;
     padding-block: 4rem;
@@ -50,28 +61,26 @@ section {
     align-items: end;
     line-height: 14vh;
     letter-spacing: 0.7;
-  }
-  .top-center-left h1 {
-    font-size: 8rem;
-    color: white;
-    font-weight: 900;
+    
+    h1 {
+      font-size: 8rem;
+      color: white;
+      font-weight: 900;
+    }
   }
 
   .top-center-right {
-    background-color:aqua;
+    height: 120vh;
     position: relative;
-    bottom: 0%;
     display: flex;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-      Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
-      sans-serif;
-
+    font-family: system-ui, -apple-system, sans-serif;
     gap: 1.5rem;
     padding: 0rem 5rem;
     flex-direction: column;
     color: white;
     justify-content: flex-end;
     width: 50%;
+
     .right-upper-text h4 {
       font-size: 1.5rem;
       display: flex;
@@ -90,11 +99,14 @@ section {
       padding-right: 1vw;
       color: white;
       font-weight: 300;
+      cursor: pointer;
+      display: inline-block;
     }
     h5 span:hover {
       color: grey;
     }
   }
+
   #left-line {
     width: 35rem;
     height: 1px;
@@ -118,56 +130,59 @@ section {
 /* ******************** */
 /* Section 2 */
 /* ******************** */
-
 #section2 {
   padding-inline: 3vw;
   position: relative;
   z-index: 2;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: system-ui, -apple-system, sans-serif;
+
   #section2-center {
     margin-top: 30vh;
+    
     .center-headings {
       display: flex;
+      align-items: baseline;
       gap: 5vw;
       opacity: 0.2;
       color: white;
       cursor: pointer;
-      padding-block: 1rem;
-      transition: all 0.3s linear;
       padding-block: 2rem;
-    }
-    .center-headings:hover {
-      opacity: 1;
-    }
-    .center-headings p {
-      line-height: 1;
-      font-size: 5rem;
-      font-weight: 100;
-      letter-spacing: 0.2rem;
-    }
-    .center-headings span {
-      width: 10vw;
-      text-align: end;
-      margin-top: 0.8rem;
-      letter-spacing: 0.2rem;
-      font-size: 0.7rem;
+      transition: all 0.3s linear;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      
+      &:hover {
+        opacity: 1;
+      }
+
+      p {
+        line-height: 1;
+        font-size: 5rem;
+        font-weight: 100;
+        letter-spacing: 0.2rem;
+      }
+      span {
+        width: 10vw;
+        text-align: end;
+        letter-spacing: 0.2rem;
+        font-size: 0.7rem;
+        white-space: nowrap;
+      }
     }
   }
 }
 
+/* Background Logic */
 #canvas::after {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -1;
-
   background-image: url(/background-xxs.png);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-
   opacity: var(--imgOpacity, 1);
+  transition: opacity 0.3s ease;
 }
 
 main:has(#section2 .center-headings:hover) #canvas::after {
@@ -180,6 +195,7 @@ main:has(#section2 .center-headings:hover) #canvas::after {
   height: 100vh;
   top: 0;
   left: 0;
+  pointer-events: none; /* Important so it doesn't block clicks */
 
   img {
     height: 100%;
@@ -193,49 +209,19 @@ main:has(#section2 .center-headings:hover) #canvas::after {
   }
 }
 
-main:has(#section2 .center-headings[img-title="tomorrowland"]:hover)
-  .images
-  #tomorrowland {
-  opacity: 1;
-  background-color: rgb(7, 14, 37);
-}
+/* Specific Image Hovers */
+main:has(#section2 .center-headings[img-title="tomorrowland"]:hover) .images #tomorrowland { opacity: 1; background-color: rgb(7, 14, 37); }
+main:has(#section2 .center-headings[img-title="navy-pier"]:hover) .images #navy-pier { opacity: 1; background-color: rgb(7, 14, 37); }
+main:has(#section2 .center-headings[img-title="chicago"]:hover) .images #chicago { opacity: 1; background-color: rgb(6, 14, 40); }
+main:has(#section2 .center-headings[img-title="phone"]:hover) .images #phone { opacity: 1; background-color: rgb(5, 11, 33); }
+main:has(#section2 .center-headings[img-title="kikk"]:hover) .images #kikk { opacity: 1; background-color: rgb(17, 38, 104); }
+main:has(#section2 .center-headings[img-title="kennedy"]:hover) .images #kennedy { opacity: 1; background-color: rgba(13, 55, 94, 0.478); }
+main:has(#section2 .center-headings[img-title="opera"]:hover) .images #opera { opacity: 1; background-color: rgb(114, 4, 4); }
 
-main:has(#section2 .center-headings[img-title="navy-pier"]:hover)
-  .images
-  #navy-pier {
-  opacity: 1;
-  background-color: rgb(7, 14, 37);
-}
 
-main:has(#section2 .center-headings[img-title="chicago"]:hover)
-  .images
-  #chicago {
-  opacity: 1;
-  background-color: rgb(6, 14, 40);
-}
-
-main:has(#section2 .center-headings[img-title="phone"]:hover) .images #phone {
-  opacity: 1;
-  background-color: rgb(5, 11, 33);
-}
-
-main:has(#section2 .center-headings[img-title="kikk"]:hover) .images #kikk {
-  opacity: 1;
-  background-color: rgb(17, 38, 104);
-}
-
-main:has(#section2 .center-headings[img-title="kennedy"]:hover)
-  .images
-  #kennedy {
-  opacity: 1;
-  background-color: rgba(13, 55, 94, 0.478);
-}
-
-main:has(#section2 .center-headings[img-title="opera"]:hover) .images #opera {
-  opacity: 1;
-  background-color: rgb(114, 4, 4);
-}
-
+/* ******************** */
+/* Section 3 */
+/* ******************** */
 #section3 {
   margin-top: 45vh;
   display: flex;
@@ -248,8 +234,6 @@ main:has(#section2 .center-headings[img-title="opera"]:hover) .images #opera {
 
   #left-bottom {
     width: 50%;
-
-    /* height: 100vh; */
     h6 {
       color: grey;
     }
@@ -263,12 +247,10 @@ main:has(#section2 .center-headings[img-title="opera"]:hover) .images #opera {
       padding: 1rem 2rem;
       z-index: 1;
     }
-
     h1::before {
       content: "";
       position: absolute;
       inset: 0;
-      /* background: rgba(255, 255, 255, 0.25); */
       filter: blur(25px);
       background-image: url(/background-xxs.png);
       background-size: cover;
@@ -283,6 +265,9 @@ main:has(#section2 .center-headings[img-title="opera"]:hover) .images #opera {
   }
 }
 
+/* ******************** */
+/* Section 4 */
+/* ******************** */
 #section4 {
   position: relative;
   background: linear-gradient(
@@ -303,258 +288,215 @@ main:has(#section2 .center-headings[img-title="opera"]:hover) .images #opera {
 
   #section4-center {
     display: flex;
+    padding-bottom: 5rem;
   }
+
   #section4-bottom {
     padding-bottom: 10rem;
     display: flex;
     #section4-bottom-left {
       width: 50%;
     }
+    #section4-bottom-right {
+       width: 50%;
+    }
     h1 {
       font-size: 1rem;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
-        sans-serif;
+      font-family: system-ui, -apple-system, sans-serif;
       border-bottom: 2px solid red;
       font-weight: 400;
       color: white;
       padding-block: 1rem;
+      display: inline-block;
     }
   }
 
   #left-bottom {
     width: 50%;
-
-    /* height: 100vh; */
-    h6 {
-      color: grey;
-    }
-    h1 {
-      color: white;
-
-      font-size: 3vw;
-      width: 60%;
-      font-weight: 100;
-      margin-top: 3rem;
-    }
   }
+  
   #right-bottom {
     width: 50%;
-    /* height: 100vh; */
     display: flex;
     gap: 4rem;
+    padding-right: 5vw;
+    
     p {
       line-height: 1.5;
-      width: 28%;
+      width: 100%; /* Changed from 28% to allow flexibility */
+      max-width: 300px;
       color: rgba(255, 255, 255, 0.39);
     }
   }
+
   footer {
-    padding-bottom: 25vh;
+    padding-bottom: 10vh;
     padding-inline: 13vw;
-    height: 10vh;
+    
     .footer-center {
       display: flex;
       justify-content: space-between;
+      flex-wrap: wrap; /* Allows wrapping */
+      
       .footer-center-divs h1 {
-        padding-top: 10vh;
+        padding-top: 5vh;
         font-size: 1.5rem;
         color: rgba(255, 255, 255, 0.575);
       }
       .footer-center-divs {
         text-align: end;
         svg {
-          width: 20%;
+          width: 50px; /* Fixed width for icon */
         }
       }
     }
   }
 }
 
-/* ========================= */
-/* 📱 Mobile (max-width: 768px) */
-/* ========================= */
+/* ========================================= */
+/* RESPONSIVE MEDIA QUERIES            */
+/* ========================================= */
+
 @media (max-width: 768px) {
-  /* ---------- Global ---------- */
-  html,
-  body {
-    overflow-x: hidden;
-  }
-
-  nav {
-    padding: 1rem 1.2rem;
-    font-size: 3.5vw;
-  }
-
-  nav .nav-elem {
-    max-width: none;
-  }
-
-  nav svg {
-    width: 120px;
-  }
-
-  nav h4 {
-    font-size: 3.5vw;
-  }
-
-  /* Hide "Our Showreel" arrow text */
-  nav .nav-elem:nth-child(2) {
-    display: none;
-  }
-
-  /* ---------- Section 1 ---------- */
+  
+  /* Section 1: Hero */
   #section1 {
-    flex-direction: column;
-    min-height: auto;
-    padding-top: 6rem;
+    nav {
+      padding: 1.5rem;
+      .showreel {
+        display: none; /* Hide showreel on mobile to save space */
+      }
+    }
+
+    .section1center {
+      flex-direction: column; /* Stack vertically */
+    }
+
+    .top-center-left {
+      width: 100%;
+      align-items: center; /* Center align text */
+      padding-block: 2rem;
+      
+      h1 {
+        font-size: 4rem; /* Smaller font */
+        line-height: 1.1;
+      }
+    }
+
+    .top-center-right {
+      width: 100%;
+      height: auto;
+      padding: 2rem;
+      gap: 2rem;
+      
+      .right-upper-text h4 {
+        font-size: 1.1rem;
+      }
+      
+      h5 {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+    }
+    
+    /* Hide decorative lines that clutter mobile */
+    #left-line, #right-line {
+      display: none;
+    }
   }
 
-  #section1 .top-center-left,
-  #section1 .top-center-right {
-    width: 100%;
-    padding: 0 1.5rem;
-  }
-
-  #section1 .top-center-left {
-    align-items: flex-start;
-    line-height: 1.1;
-  }
-
-  #section1 .top-center-left h1 {
-    font-size: 14vw;
-  }
-
-  #section1 .top-center-right {
-    margin-top: 3rem;
-    padding: 0 1.5rem;
-  }
-
-  #section1 .right-upper-text h4 {
-    font-size: 4vw;
-  }
-
-  #section1 .right-lower-text span {
-    font-size: 3.5vw;
-  }
-
-  #section1 h5 span {
-    font-size: 3vw;
-  }
-
-  /* Hide decorative lines */
-  #left-line,
-  #right-line {
-    display: none;
-  }
-
-  /* ---------- Section 2 ---------- */
+  /* Section 2: Projects */
   #section2 {
-    padding-inline: 1.5rem;
+    #section2-center {
+      margin-top: 10vh;
+      
+      .center-headings {
+        flex-direction: column-reverse; /* Put year above text */
+        gap: 0.5rem;
+        padding-block: 1.5rem;
+        opacity: 0.8; /* Make visible by default on mobile */
+        
+        p {
+          font-size: 2.5rem; /* Smaller list items */
+          letter-spacing: normal;
+        }
+        span {
+          width: 100%;
+          text-align: left;
+          font-size: 0.8rem;
+          color: rgba(255,255,255,0.5);
+        }
+      }
+    }
   }
 
-  #section2 #section2-center {
-    margin-top: 15vh;
-  }
-
-  .center-headings {
-    flex-direction: column;
-    gap: 0.5rem;
-    opacity: 1;
-  }
-
-  .center-headings span {
-    width: auto;
-    text-align: left;
-    font-size: 3vw;
-  }
-
-  .center-headings p {
-    font-size: 9vw;
-    letter-spacing: 0;
-  }
-
-  /* Disable hover-based background swap on mobile */
-  .images {
-    display: none;
-  }
-
-  main:has(#section2 .center-headings:hover) #canvas::after {
-    opacity: 1;
-  }
-
-  /* ---------- Section 3 ---------- */
+  /* Section 3: "How we do it" */
   #section3 {
-    flex-direction: column;
-    margin-top: 20vh;
-    padding-inline: 1.5rem;
+    margin-top: 10vh;
+    padding-inline: 5vw;
+    
+    #left-bottom {
+      width: 100%;
+      
+      h1 {
+        width: 100%;
+        font-size: 2rem;
+        padding: 0;
+        
+        &::before {
+          filter: blur(40px); /* Increase blur on mobile */
+        }
+      }
+    }
+    #right-bottom {
+      display: none; /* Hide empty spacer */
+    }
   }
 
-  #section3 #left-bottom {
-    width: 100%;
-  }
+  /* Section 4: Footer area */
+  #section4 {
+    #line3 { display: none; }
 
-  #section3 h1 {
-    font-size: 5vw;
-    width: 100%;
-    padding: 1.2rem;
-  }
+    #section4-center {
+      flex-direction: column;
+      padding-inline: 5vw;
+      
+      #left-bottom { width: 100%; display: none; }
+      
+      #right-bottom {
+        width: 100%;
+        flex-direction: column;
+        gap: 2rem;
+        
+        p {
+          width: 100%;
+          max-width: none;
+        }
+      }
+    }
 
-  #section3 #right-bottom {
-    display: none;
-  }
+    #section4-bottom {
+      padding-inline: 5vw;
+      padding-bottom: 5rem;
+      
+      #section4-bottom-left { display: none; }
+      #section4-bottom-right { width: 100%; }
+    }
 
-  /* ---------- Section 4 ---------- */
-  #section4 #section4-center {
-    flex-direction: column;
-    padding-inline: 1.5rem;
-  }
-
-  #section4 #left-bottom,
-  #section4 #right-bottom {
-    width: 100%;
-  }
-
-  #section4 #right-bottom {
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  #section4 #right-bottom p {
-    width: 100%;
-    font-size: 3.5vw;
-  }
-
-  #line3 {
-    display: none;
-  }
-
-  /* ---------- Footer ---------- */
-  footer {
-    padding-inline: 1.5rem;
-    padding-bottom: 10vh;
-  }
-
-  .footer-center {
-    flex-direction: column;
-    gap: 2rem;
-  }
-
-  .footer-center-divs {
-    text-align: left;
-  }
-
-  .footer-center-divs h1 {
-    font-size: 5vw;
-    padding-top: 0;
-  }
-
-  .footer-center-divs svg {
-    width: 60px;
-  }
-
-  /* ---------- Canvas ---------- */
-  #canvas {
-    pointer-events: none;
+    footer {
+      padding-inline: 5vw;
+      
+      .footer-center {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        
+        .footer-center-divs {
+          text-align: center;
+          h1 { padding-top: 0; }
+        }
+      }
+    }
   }
 }
