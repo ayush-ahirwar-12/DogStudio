@@ -7,7 +7,7 @@ html,
 body,
 #root {
   width: 100%;
-  background-color: #15161B;
+  background-color: #15161b;
 }
 main {
   position: relative;
@@ -18,27 +18,30 @@ section {
   z-index: 2;
 }
 
-nav {
-  display: flex;
-  color: white;
-  align-items: center;
-  justify-content: space-between;
-  padding: 2rem 3rem;
-  font-size: 1vw;
-  position: sticky;
-  z-index: 2;
-  svg {
-    width: 100%;
-    height: 100%;
-  }
-  .nav-elem {
-    padding: 1vw 0;
-    max-width: 7rem;
-  }
-}
 #section1 {
+  nav {
+    display: flex;
+    color: white;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 3rem;
+    font-size: 1vw;
+    position: sticky;
+    z-index: 2;
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+    .nav-elem {
+      padding: 1vw 0;
+      max-width: 7rem;
+    }
+  }
+  .section1center {
+    display: flex;
+  }
   min-height: 120vh;
-  display: flex;
+  /* display: flex; */
   .top-center-left {
     width: 50%;
     padding-block: 4rem;
@@ -55,6 +58,9 @@ nav {
   }
 
   .top-center-right {
+    background-color:aqua;
+    position: relative;
+    bottom: 0%;
     display: flex;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
       Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
@@ -164,7 +170,6 @@ nav {
   opacity: var(--imgOpacity, 1);
 }
 
-
 main:has(#section2 .center-headings:hover) #canvas::after {
   opacity: 0;
 }
@@ -206,37 +211,32 @@ main:has(#section2 .center-headings[img-title="chicago"]:hover)
   .images
   #chicago {
   opacity: 1;
-background-color: rgb(6, 14, 40)}
-
-main:has(#section2 .center-headings[img-title="phone"]:hover)
-  .images
-  #phone {
-  opacity: 1;
-background-color: rgb(5, 11, 33)
+  background-color: rgb(6, 14, 40);
 }
 
-main:has(#section2 .center-headings[img-title="kikk"]:hover)
-  .images
-  #kikk{
+main:has(#section2 .center-headings[img-title="phone"]:hover) .images #phone {
+  opacity: 1;
+  background-color: rgb(5, 11, 33);
+}
+
+main:has(#section2 .center-headings[img-title="kikk"]:hover) .images #kikk {
   opacity: 1;
   background-color: rgb(17, 38, 104);
 }
 
 main:has(#section2 .center-headings[img-title="kennedy"]:hover)
   .images
-  #kennedy{
+  #kennedy {
   opacity: 1;
   background-color: rgba(13, 55, 94, 0.478);
 }
 
-main:has(#section2 .center-headings[img-title="opera"]:hover)
-  .images
-  #opera{
+main:has(#section2 .center-headings[img-title="opera"]:hover) .images #opera {
   opacity: 1;
-  background-color:rgb(114, 4, 4);
+  background-color: rgb(114, 4, 4);
 }
 
-#section3{
+#section3 {
   margin-top: 45vh;
   display: flex;
   padding-top: 20vh;
@@ -246,53 +246,52 @@ main:has(#section2 .center-headings[img-title="opera"]:hover)
   isolation: isolate;
   min-height: initial;
 
-  #left-bottom{
+  #left-bottom {
     width: 50%;
 
     /* height: 100vh; */
-    h6{
+    h6 {
       color: grey;
-
     }
-h1 {
-  position: relative;
-  color: white;
-  font-size: 3vw;
-  width: 60%;
-  font-weight: 100;
-  margin-top: 3rem;
-  padding: 1rem 2rem;
-  z-index: 1;
-}
+    h1 {
+      position: relative;
+      color: white;
+      font-size: 3vw;
+      width: 60%;
+      font-weight: 100;
+      margin-top: 3rem;
+      padding: 1rem 2rem;
+      z-index: 1;
+    }
 
-h1::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  /* background: rgba(255, 255, 255, 0.25); */
-  filter: blur(25px);
-  background-image: url(/background-xxs.png);
-  background-size: cover;
-  background-repeat: no-repeat;
-  z-index: -1;
-  border-radius:150px;
-}
+    h1::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      /* background: rgba(255, 255, 255, 0.25); */
+      filter: blur(25px);
+      background-image: url(/background-xxs.png);
+      background-size: cover;
+      background-repeat: no-repeat;
+      z-index: -1;
+      border-radius: 150px;
+    }
   }
-    #right-bottom{
+  #right-bottom {
     width: 50%;
     height: 100vh;
   }
 }
 
-#section4{
-  position: relative;background: linear-gradient(
+#section4 {
+  position: relative;
+  background: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 0) 0%,
     rgba(21, 22, 27, 1) 40%
   );
 
-
-  #line3{
+  #line3 {
     height: 1px;
     width: 20vw;
     background-color: rgba(255, 0, 0, 0.722);
@@ -302,37 +301,36 @@ h1::before {
     rotate: 50deg;
   }
 
-  #section4-center{
+  #section4-center {
     display: flex;
   }
-  #section4-bottom{
+  #section4-bottom {
     padding-bottom: 10rem;
     display: flex;
-    #section4-bottom-left{
+    #section4-bottom-left {
       width: 50%;
     }
-    h1{
+    h1 {
       font-size: 1rem;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
-      ;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+        sans-serif;
       border-bottom: 2px solid red;
       font-weight: 400;
       color: white;
-      padding-block: 1rem ;
+      padding-block: 1rem;
     }
-
   }
 
-  #left-bottom{
+  #left-bottom {
     width: 50%;
 
     /* height: 100vh; */
-    h6{
+    h6 {
       color: grey;
-
     }
-    h1{
-      color:white;
+    h1 {
+      color: white;
 
       font-size: 3vw;
       width: 60%;
@@ -340,48 +338,46 @@ h1::before {
       margin-top: 3rem;
     }
   }
-    #right-bottom{
+  #right-bottom {
     width: 50%;
     /* height: 100vh; */
     display: flex;
     gap: 4rem;
-    p{
+    p {
       line-height: 1.5;
       width: 28%;
       color: rgba(255, 255, 255, 0.39);
     }
   }
-  footer{
+  footer {
     padding-bottom: 25vh;
     padding-inline: 13vw;
     height: 10vh;
-    .footer-center{
+    .footer-center {
       display: flex;
       justify-content: space-between;
-      .footer-center-divs h1{
+      .footer-center-divs h1 {
         padding-top: 10vh;
         font-size: 1.5rem;
         color: rgba(255, 255, 255, 0.575);
       }
-      .footer-center-divs{
+      .footer-center-divs {
         text-align: end;
         svg {
-    width: 20%;
-
-  }
+          width: 20%;
+        }
       }
     }
   }
 }
 
-
 /* ========================= */
 /* 📱 Mobile (max-width: 768px) */
 /* ========================= */
 @media (max-width: 768px) {
-
   /* ---------- Global ---------- */
-  html, body {
+  html,
+  body {
     overflow-x: hidden;
   }
 

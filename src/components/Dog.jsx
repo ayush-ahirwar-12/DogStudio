@@ -212,9 +212,9 @@ const Dog = () => {
         scrub: true,
       },
     });
-
+    const zMove = size.width < 768 ? 0.2 : 0.4;
     tl.to(dogModel.current.scene.position, {
-      z: "-=0.40",
+      z: `-=${zMove}`,
     });
 
     tl.to(dogModel.current.scene.rotation, {
@@ -225,7 +225,7 @@ const Dog = () => {
       dogModel.current.scene.rotation,
       {
         x: `-=${Math.PI / 60}`,
-        y: `-=${Math.PI}`,
+        y: size.width < 768 ? `-=${Math.PI / 2}` : `-=${Math.PI}`,
         // onUpdate:()=>{
         //     baseRotation.current.copy(dogModel.current.scene.rotation);
         // }

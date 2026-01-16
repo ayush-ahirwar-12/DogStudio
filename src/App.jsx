@@ -27,7 +27,9 @@ const App = () => {
       >
         <Dog />
       </Canvas>
-      <nav>
+      
+      <section id="section1">
+        <nav>
         <div className="nav-elem">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -75,7 +77,7 @@ const App = () => {
           <i class="ri-menu-3-line"></i>
         </div>
       </nav>
-      <section id="section1">
+      <div className="section1center">
         <div className="top-center-left">
           <h1>We</h1>
           <h1>Make</h1>
@@ -105,6 +107,7 @@ const App = () => {
             <span>Twitter</span>
             <span>Newsletter</span>
           </h5>
+        </div>
         </div>
         <div id="left-line"></div>
         <div id="right-line"></div>
