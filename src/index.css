@@ -373,3 +373,192 @@ h1::before {
     }
   }
 }
+
+
+/* ========================= */
+/* 📱 Mobile (max-width: 768px) */
+/* ========================= */
+@media (max-width: 768px) {
+
+  /* ---------- Global ---------- */
+  html, body {
+    overflow-x: hidden;
+  }
+
+  nav {
+    padding: 1rem 1.2rem;
+    font-size: 3.5vw;
+  }
+
+  nav .nav-elem {
+    max-width: none;
+  }
+
+  nav svg {
+    width: 120px;
+  }
+
+  nav h4 {
+    font-size: 3.5vw;
+  }
+
+  /* Hide "Our Showreel" arrow text */
+  nav .nav-elem:nth-child(2) {
+    display: none;
+  }
+
+  /* ---------- Section 1 ---------- */
+  #section1 {
+    flex-direction: column;
+    min-height: auto;
+    padding-top: 6rem;
+  }
+
+  #section1 .top-center-left,
+  #section1 .top-center-right {
+    width: 100%;
+    padding: 0 1.5rem;
+  }
+
+  #section1 .top-center-left {
+    align-items: flex-start;
+    line-height: 1.1;
+  }
+
+  #section1 .top-center-left h1 {
+    font-size: 14vw;
+  }
+
+  #section1 .top-center-right {
+    margin-top: 3rem;
+    padding: 0 1.5rem;
+  }
+
+  #section1 .right-upper-text h4 {
+    font-size: 4vw;
+  }
+
+  #section1 .right-lower-text span {
+    font-size: 3.5vw;
+  }
+
+  #section1 h5 span {
+    font-size: 3vw;
+  }
+
+  /* Hide decorative lines */
+  #left-line,
+  #right-line {
+    display: none;
+  }
+
+  /* ---------- Section 2 ---------- */
+  #section2 {
+    padding-inline: 1.5rem;
+  }
+
+  #section2 #section2-center {
+    margin-top: 15vh;
+  }
+
+  .center-headings {
+    flex-direction: column;
+    gap: 0.5rem;
+    opacity: 1;
+  }
+
+  .center-headings span {
+    width: auto;
+    text-align: left;
+    font-size: 3vw;
+  }
+
+  .center-headings p {
+    font-size: 9vw;
+    letter-spacing: 0;
+  }
+
+  /* Disable hover-based background swap on mobile */
+  .images {
+    display: none;
+  }
+
+  main:has(#section2 .center-headings:hover) #canvas::after {
+    opacity: 1;
+  }
+
+  /* ---------- Section 3 ---------- */
+  #section3 {
+    flex-direction: column;
+    margin-top: 20vh;
+    padding-inline: 1.5rem;
+  }
+
+  #section3 #left-bottom {
+    width: 100%;
+  }
+
+  #section3 h1 {
+    font-size: 5vw;
+    width: 100%;
+    padding: 1.2rem;
+  }
+
+  #section3 #right-bottom {
+    display: none;
+  }
+
+  /* ---------- Section 4 ---------- */
+  #section4 #section4-center {
+    flex-direction: column;
+    padding-inline: 1.5rem;
+  }
+
+  #section4 #left-bottom,
+  #section4 #right-bottom {
+    width: 100%;
+  }
+
+  #section4 #right-bottom {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  #section4 #right-bottom p {
+    width: 100%;
+    font-size: 3.5vw;
+  }
+
+  #line3 {
+    display: none;
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    padding-inline: 1.5rem;
+    padding-bottom: 10vh;
+  }
+
+  .footer-center {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .footer-center-divs {
+    text-align: left;
+  }
+
+  .footer-center-divs h1 {
+    font-size: 5vw;
+    padding-top: 0;
+  }
+
+  .footer-center-divs svg {
+    width: 60px;
+  }
+
+  /* ---------- Canvas ---------- */
+  #canvas {
+    pointer-events: none;
+  }
+}
