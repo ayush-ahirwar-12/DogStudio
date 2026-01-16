@@ -13,13 +13,15 @@ const Dog = () => {
 
   const model = useGLTF("/models/dog.drc.glb");
   const dogRef = useRef();
+  const { viewport, size } = useThree();
+
   // const groupRef = useRef();
 
   const baseRotation = useRef(new THREE.Euler(0, Math.PI / 5, 0));
 
 
-  useThree(({ camera, scene, gl }) => {
-    camera.position.z = 0.42;
+  useThree(({ camera,size ,scene, gl }) => {
+    camera.position.z = size.width<768?0.7:0.42;
     gl.toneMapping = THREE.ReinhardToneMapping;
     gl.outputColorSpace = THREE.SRGBColorSpace;
   });
@@ -426,14 +428,26 @@ const Dog = () => {
 //   );
 // });
 
+const isMobile = size.width < 768;
+const modelScale = isMobile ? 0.8 : 1;
+const modelPosition = isMobile
+  ? [0, -0.7, 0.1]
+  : [0.2, -0.55, 0];
+
+const modelRotation = isMobile
+  ? [0, Math.PI / 10, 0]
+  : [0, Math.PI / 6, 0];
+
+
 
   return (
     <>
         <primitive
           // ref={dogRef}
           object={model.scene}
-          position={[0.2, -0.55, 0]}
-          rotation={[0,Math.PI/6,0]}
+          scale={modelScale}
+          position={modelPosition}
+          rotation={modelRotation}
         />
       <directionalLight positon={[0, 5, 5]} color={0xffffff} intensity={10} />
 
