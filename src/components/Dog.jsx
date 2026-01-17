@@ -23,7 +23,7 @@ const Dog = () => {
 
   const rotationConfig = {
   xIntro: isMobile ? Math.PI / 32 : Math.PI / 16,
-  xOutro: isMobile ? Math.PI / 80 : Math.PI / 60,
+  xOutro: isMobile ? Math.PI / 80 : Math.PI / 76,
   yRotate: isMobile ? Math.PI / 2 : Math.PI,
 };
 
@@ -216,9 +216,13 @@ const Dog = () => {
 
   const scene = dogModel.current.scene;
 
+  const yMove = isMobile
+  ? viewport.height * 0.04
+  : viewport.height * 0.02;
+
   const tl = gsap.timeline({
     scrollTrigger: {
-      trigger: "nav",
+      trigger: "#section1",
       start: "top top",
       endTrigger: "#section4",
       end: "bottom bottom",
@@ -247,21 +251,21 @@ const Dog = () => {
   );
 
   tl.to(
-    scene.rotation,
+    dogModel.current.scene.rotation,
     {
-      x: rotationConfig.xIntro - rotationConfig.xOutro,
-      y: -rotationConfig.yRotate,
+      x: `-=${Math.PI/60}`,
+      y: isMobile ? `-=${Math.PI/2}` : `-=${Math.PI}`,
       ease: "none",
     },
     "three"
   );
 
   tl.to(
-    scene.position,
+    dogModel.current.scene.position,
     {
-      z: isMobile ? 0.1 : 0.2,
+      z: "+=0.20",
       x: isMobile ? -0.3 : -0.6,
-      y: isMobile ? 0.08 : 0.13,
+      y: "+=0.13",
       ease: "none",
     },
     "three"
