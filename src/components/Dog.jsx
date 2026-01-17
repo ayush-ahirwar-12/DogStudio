@@ -21,15 +21,8 @@ const Dog = () => {
 
   const modelRotation = isMobile ? [0, Math.PI / 6, 0] : [0, Math.PI / 6, 0];
 
-  const rotationConfig = {
-  xIntro: isMobile ? Math.PI / 32 : Math.PI / 16,
-  xOutro: isMobile ? Math.PI / 80 : Math.PI / 76,
-  yRotate: isMobile ? Math.PI / 2 : Math.PI,
-};
 
   // const groupRef = useRef();
-
-  const baseRotation = useRef(new THREE.Euler(0, Math.PI / 5, 0));
 
   useThree(({ camera, size, scene, gl }) => {
     camera.position.z = size.width < 768 ? 0.7 : 0.42;
@@ -99,7 +92,7 @@ const Dog = () => {
     "/branches_normals.jpeg",
     "/branches_diffuse.jpeg",
   ]).map((texture) => {
-    texture.flipY = false;
+    texture.flipY = true;
     // texture.colorSpace = THREE.SRGBColorSpace;
     return texture;
   });
@@ -254,7 +247,7 @@ const Dog = () => {
     dogModel.current.scene.rotation,
     {
       x: `-=${Math.PI/100}`,
-      y: isMobile ? `-=${Math.PI/2}` : `-=${Math.PI/1.2}`,
+      y: `-=${Math.PI/1.2}`,
       ease: "none",
     },
     "three"
@@ -263,9 +256,9 @@ const Dog = () => {
   tl.to(
     dogModel.current.scene.position,
     {
-      z: "+=0.15",
-      y: "+=0.13",
-      x: "-=0.6",
+      z: isMobile?"+=0.10":"+=0.15",
+      y: isMobile?"+=0.3":"+=0.13",
+      x: isMobile?"-=0.3":"-=0.6",
 
       ease: "none",
     },
