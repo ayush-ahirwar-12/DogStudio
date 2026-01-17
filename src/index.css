@@ -500,3 +500,46 @@ main:has(#section2 .center-headings[img-title="opera"]:hover) .images #opera { o
     }
   }
 }
+
+/* Loader Css */
+
+.loader {
+  position: fixed;
+  inset: 0;
+  background: #0b0b0b;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader-inner {
+  text-align: center;
+  color: white;
+}
+
+.loader-inner h1 {
+  font-size: clamp(2rem, 6vw, 4rem);
+  letter-spacing: 0.15em;
+  margin-bottom: 2rem;
+}
+
+.progress-track {
+  width: 260px;
+  height: 2px;
+  background: rgba(255,255,255,0.15);
+  margin: auto;
+  overflow: hidden;
+}
+
+.progress-bar {
+  width: 0%;
+  height: 100%;
+  background: white;
+}
+
+.loader-inner p {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  opacity: 0.6;
+}
