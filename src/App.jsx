@@ -12,7 +12,9 @@ const App = () => {
     {!loaded && <Loader onComplete={() => setLoaded(true)} />}
       {/* Canvas Layer */}
       
-      <Canvas
+
+      <main className={loaded?"visible":"hidden"}>
+              <Canvas
         id="canvas"
         style={{
           height: "100vh",
@@ -28,7 +30,6 @@ const App = () => {
         <Dog />
         </Suspense>
       </Canvas>
-      <main className={loaded?"visible":"hidden"}>
         <div className="images">
           <img id="tomorrowland" src="/background/tomorrowland.png" alt="" />
           <img id="navy-pier" src="/background/navy-pier.png" alt="" />
@@ -207,7 +208,7 @@ const App = () => {
               <div className="footer-center-divs">
                 <svg
                   fill="white"
-                  class="baseline"
+                  className="baseline"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 30.67 54.43"
                 >

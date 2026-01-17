@@ -204,12 +204,15 @@ const Dog = () => {
 
   const dogModel = useRef(model);
 
-  gsap.to(dogModel.current.scene.position,{
+  useEffect(()=>{
+      gsap.to(dogModel.current.scene.position,{
     z:0,
     delay:0.2,
     duration:1.4,
     ease:"power3.out"
   })
+  },[])
+
 
  useGSAP(() => {
   if (!dogModel.current?.scene) return;
