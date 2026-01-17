@@ -239,8 +239,8 @@ const Dog = () => {
   });
 
   tl.to(scene.rotation, {
-    x: rotationConfig.xIntro,
-    ease: "none",
+    x: `+=${Math.PI / 16}`
+,    ease: "none",
   });
 
   tl.fromTo(
@@ -253,7 +253,7 @@ const Dog = () => {
   tl.to(
     dogModel.current.scene.rotation,
     {
-      x: `-=${Math.PI/60}`,
+      x: `-=${Math.PI/50}`,
       y: isMobile ? `-=${Math.PI/2}` : `-=${Math.PI}`,
       ease: "none",
     },
@@ -263,8 +263,8 @@ const Dog = () => {
   tl.to(
     dogModel.current.scene.position,
     {
-      z: "+=0.20",
-      x: isMobile ? -0.3 : -0.6,
+      // z: "+=0.20",
+      x: "-=0.6",
       y: "+=0.13",
       ease: "none",
     },
