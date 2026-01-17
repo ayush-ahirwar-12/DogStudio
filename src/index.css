@@ -544,7 +544,7 @@ main:has(#section2 .center-headings[img-title="opera"]:hover) .images #opera { o
   opacity: 0.6;
 }
 
-.hidden {
+/* .hidden {
   opacity: 0;
   pointer-events: none;
 }
@@ -552,4 +552,13 @@ main:has(#section2 .center-headings[img-title="opera"]:hover) .images #opera { o
 .visible {
   opacity: 1;
   transition: opacity 1s ease;
+} */
+
+.progress-bar {
+  animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+  from { opacity: 0.6; }
+  to { opacity: 1; }
 }

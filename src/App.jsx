@@ -11,6 +11,7 @@ const App = () => {
     <>
     {!loaded && <Loader onComplete={() => setLoaded(true)} />}
       {/* Canvas Layer */}
+      
       <Canvas
         id="canvas"
         style={{

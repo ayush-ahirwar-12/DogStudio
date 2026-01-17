@@ -14,6 +14,7 @@ const Loader = ({ onComplete }) => {
       ease: "power2.out",
     });
 
+
     if (progress === 100) {
       gsap.to(loaderRef.current, {
         opacity: 0,
@@ -23,7 +24,7 @@ const Loader = ({ onComplete }) => {
       });
     }
   }, [progress]);
-  return(
+  return (
     <div ref={loaderRef} className="loader">
       <div className="loader-inner">
         <h1>DogStudio</h1>
@@ -33,7 +34,7 @@ const Loader = ({ onComplete }) => {
         <p>{Math.floor(progress)}%</p>
       </div>
     </div>
-  )
+  );
 };
 
 export default Loader;

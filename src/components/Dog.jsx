@@ -17,7 +17,7 @@ const Dog = () => {
 
   const isMobile = size.width < 768;
   const modelScale = isMobile ? 0.8 : 1;
-  const modelPosition = isMobile ? [0.1, -0.5, 0.1] : [0.2, -0.55, 0];
+  const modelPosition = isMobile ? [0.1, -0.5, 0.1] : [0.2, -0.55, 0.2];
 
   const modelRotation = isMobile ? [0, Math.PI / 6, 0] : [0, Math.PI / 6, 0];
 
@@ -203,6 +203,13 @@ const Dog = () => {
   });
 
   const dogModel = useRef(model);
+
+  gsap.to(dogModel.current.scene.position,{
+    z:0,
+    delay:0.2,
+    duration:1.4,
+    ease:"power3.out"
+  })
 
  useGSAP(() => {
   if (!dogModel.current?.scene) return;
